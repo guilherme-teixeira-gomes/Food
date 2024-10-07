@@ -22,6 +22,7 @@ import Configuracoes from "app/pages/Configuracoes"
 import Faq from "app/pages/Faq";
 import CadastrarAlimentos from "app/pages/CadastrarAlimentos";
 import Comidas from "app/pages/Comidas";
+import Aprovacao from "app/pages/Aprovacao";
 
 export enum RoutesPath {
   LOGIN = "/login",
@@ -29,6 +30,7 @@ export enum RoutesPath {
 
   TELA_INICIAL = "/home",
   COMIDAS = "/comidas",
+  APROVACAO = "/aprovacao",
   FORMULARIOS = "/formulario",
   CADASTRAR_ALIMENTOS = "/cadastrar-alimentos",
   FAQ = "/faq",
@@ -98,14 +100,12 @@ const ProviderRoutes = () => {
       <Route path={RoutesPath.RECOVER_PASSWORD} element={<RecoverPassword />} />
       <Route path={RoutesPath.TELA_INICIAL} element={<TelaInicial />} />
       <Route path={RoutesPath.COMIDAS} element={<Comidas />} />
+      <Route path={RoutesPath.APROVACAO} element={<Aprovacao />} />
       <Route path={RoutesPath.FORMULARIOS} element={<Formularios />} />
       <Route path={RoutesPath.CADASTRAR_ALIMENTOS} element={<CadastrarAlimentos />} />
       <Route path={RoutesPath.FAQ} element={<Faq />} />
       <Route path={RoutesPath.PERFIL} element={<Perfil />} />
       <Route path={RoutesPath.CONFIGURACOES} element={<Configuracoes />} />
-
-
-
       {!loading && (
         <>
           <Route path={"/"} element={<RedirectPage />} />

@@ -19,6 +19,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 const routes = Router();
 
+
+routes.get("/show/food", ComidasController.show);
+
 routes.post("/cadastrar/comidas", upload.single('file'),ComidasController.store);
 
 export default routes;

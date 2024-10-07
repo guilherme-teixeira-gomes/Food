@@ -4,6 +4,7 @@
 import { Request, Response } from "express";
 import AppError from "../errors/AppError";
 import CreateComidaService from "../services/ComidaService/CreateComidaService";
+import ShowAllFoodService from "../services/ComidaService/ShowAllFoodService";
 
 
 
@@ -20,7 +21,8 @@ export const store = async (req: Request, res: Response): Promise<Response> => {
     categoria,
     descricao, } = req.body;
 
-    const produtoImage = req.file ? req.file.filename : null;
+    const produtoImage = req.file ? `public/uploads/comidas/${req.file.filename}` : null;
+
 
 
   const data = await CreateComidaService({
@@ -42,129 +44,22 @@ export const store = async (req: Request, res: Response): Promise<Response> => {
   });
 };
 
-// export const index = async (req: Request, res: Response): Promise<Response> => {
-//   try {
-//     const data = await ShowCargoService();
+export const show = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
 
-//     return res.status(200).json({ data })
-//   } catch (error) {
-//     if (error instanceof AppError) {
-//       return res.status(error.statusCode).json({ error: error.message });
-//     } else {
-//       const exception = new Error((error as Error).message);
-//       console.error(error);
-//       return res.status(500).json({ error: exception.message });
-//     }
-//   }
-// };
+  try {
+    const data = await ShowAllFoodService();
 
-// export const dropdown = async (req: Request, res: Response): Promise<Response> => {
-//   const data = await CargoDropdownService();
-
-//   return res.json(data);
-// }
-
-// export const showCargos = async (req: Request, res: Response): Promise<Response> => {
-//   const { id } = req.params;
-//   const search = req.query.search
-
-//   const data = await ShowCargosEmpTableService(Number(id), search);
-
-//   return res.json(data);
-// }
-
-
-// export const getCargoId = async (req: Request, res: Response): Promise<Response> => {
-//   const { id } = req.params;
-
-//   try {
-//     const data = await GetCargoIdService(id);
-
-//     return res.status(200).json({ data })
-//   } catch (error) {
-//     if (error instanceof AppError) {
-//       return res.status(error.statusCode).json({ error: error.message });
-//     } else {
-//       const exception = new Error((error as Error).message);
-//       console.error(error);
-//       return res.status(500).json({ error: exception.message });
-//     }
-//   }
-// };
-
-// export const update = async (req: Request, res: Response): Promise<Response> => {
-//   const { id } = req.params;
-
-//   const body = req.body;
-
-//   const user = await UpdateCargoService(id, body);
-
-//   return res.json(user);
-// }
-
-
-// export const showCargosForFunc = async (
-//   req: Request,
-//   res: Response
-// ): Promise<Response> => {
-//   const { setorId } = req.params;
-//   try {
-//     const data = await ShowCargoForFuncService(setorId);
-
-//     return res.status(200).json({ data })
-//   } catch (error) {
-//     if (error instanceof AppError) {
-//       return res.status(error.statusCode).json({ error: error.message });
-//     } else {
-//       const exception = new Error((error as Error).message);
-//       console.error(error);
-//       return res.status(500).json({ error: exception.message });
-//     }
-//   }
-// };
-
-// export const table = async (req: Request, res: Response): Promise<Response> => {
-//   const search = req.query.search
-//   const empresa = req.query.empresa as string | undefined;
-
-//   const riscos = await ShowCargosTableService(search,empresa);
-
-//   return res.json(riscos);
-// }
-
-
-// export const getQtdTotalCargos = async (req: Request, res: Response): Promise<Response> => {
-//   const empresa = req.query.empresa as string | undefined;
-//   const result = await GetQtdCargosService(empresa);
-
-//   return res.json(result[0].total_cargos);
-// };
-
-
-// export const getCargosDash = async (req: Request, res: Response): Promise<Response> => {
-//   const result = await GetPorcentagemCargosService();
-
-//   return res.json(result);
-// };
-
-// export const getCargosDashPorMes = async (req: Request, res: Response): Promise<Response> => {
-//   const result = await GetQuantidadeCargosPorMesService();
-
-//   return res.json(result);
-// };
-
-// export const destroy = async (req: Request, res: Response) => {
-//   const { id } = req.params;
-
-//   await DeleteCargoService(id);
-
-//   return res.json({
-//     msg: "Resultado excluido com sucesso!"
-//   });
-// };
-
-// export const getQtdTotalCargosIdFiltro = async (req: Request, res: Response): Promise<Response> => {
-//   const result = await GetQtdCargosIdService(req);
-
-//   return res.json(result[0].total);
-// };
+    return res.status(200).json({data})
+  } catch (error) {
+    if (error instanceof AppError) {
+      return res.status(error.statusCode).json({ error: error.message });
+    } else {
+      const exception = new Error((error as Error).message);
+      console.error(error);
+      return res.status(500).json({ error: exception.message });
+    }
+  }
+};

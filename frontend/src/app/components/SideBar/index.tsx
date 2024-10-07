@@ -18,6 +18,8 @@ import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import MenuIcon from '@mui/icons-material/Menu';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
+import PendingActionsIcon from '@mui/icons-material/PendingActions';
+
 function SideBarOf() {
   const { user, handleLogout } = useContext(AuthContext);
   const location = useLocation();
@@ -177,6 +179,37 @@ function SideBarOf() {
                       <LocalDiningIcon />
                     </div>
                   Cadastrar Alimentos
+                  </StyledButton>
+                </Link>
+              </div>
+              <div
+                style={{ width: "100%" }}
+                className={`${
+                  isActive("/aprovacao") ? "link-active" : ""
+                } position-relative`}
+              >
+                <Link
+                  to="/aprovacao"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <StyledButton style={{ marginLeft: "10%" }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        borderRadius: "10px",
+                        padding: "7%",
+                        width: "30px",
+                        height: "30px",
+                        backgroundColor: `${
+                          isActive("/aprovacao") ? "#fe3b00e6" : "#fe6600"
+                        }`,
+                      }}
+                    >
+                      <PendingActionsIcon />
+                    </div>
+                  Em Aprovação
                   </StyledButton>
                 </Link>
               </div>
