@@ -16,22 +16,21 @@ import RedirectPage from "app/pages/RedirectPage";
 import AmTechAndPrestadorRoute from "app/context/Auth/AmTechAndPrestadorRoute";
 
 import TelaInicial from "app/pages/Home";
-import CriarChamados from "app/pages/CriarChamados";
 import Formularios from "app/pages/Formularios";
-import Chamados from "app/pages/Chamados";
-
 import Perfil from "app/pages/PerfilInconnet"
 import Configuracoes from "app/pages/Configuracoes"
 import Faq from "app/pages/Faq";
+import CadastrarAlimentos from "app/pages/CadastrarAlimentos";
+import Comidas from "app/pages/Comidas";
 
 export enum RoutesPath {
   LOGIN = "/login",
 
 
   TELA_INICIAL = "/home",
-  CRIAR_CHAMADOS = "/criarchamados",
+  COMIDAS = "/comidas",
   FORMULARIOS = "/formulario",
-  CHAMADOS = "/chamados",
+  CADASTRAR_ALIMENTOS = "/cadastrar-alimentos",
   FAQ = "/faq",
   PERFIL = "/perfil",
   CONFIGURACOES = "/configuracoes",
@@ -67,8 +66,8 @@ const ProviderRoutes = () => {
 
       const availablePaths = ["/login"];
 
-      if ( !availablePaths.includes(location.pathname)) {
-  
+      if (!availablePaths.includes(location.pathname)) {
+
       };
 
       if (result) return;
@@ -98,9 +97,9 @@ const ProviderRoutes = () => {
       <Route path={RoutesPath.LOGIN} element={<Login />} />
       <Route path={RoutesPath.RECOVER_PASSWORD} element={<RecoverPassword />} />
       <Route path={RoutesPath.TELA_INICIAL} element={<TelaInicial />} />
-      <Route path={RoutesPath.CRIAR_CHAMADOS} element={<CriarChamados />} />
+      <Route path={RoutesPath.COMIDAS} element={<Comidas />} />
       <Route path={RoutesPath.FORMULARIOS} element={<Formularios />} />
-      <Route path={RoutesPath.CHAMADOS} element={<Chamados />} />
+      <Route path={RoutesPath.CADASTRAR_ALIMENTOS} element={<CadastrarAlimentos />} />
       <Route path={RoutesPath.FAQ} element={<Faq />} />
       <Route path={RoutesPath.PERFIL} element={<Perfil />} />
       <Route path={RoutesPath.CONFIGURACOES} element={<Configuracoes />} />
@@ -110,26 +109,26 @@ const ProviderRoutes = () => {
       {!loading && (
         <>
           <Route path={"/"} element={<RedirectPage />} />
-      
+
           <Route element={<MedicoRoute />}>
-      
-          
+
+
           </Route>
 
           <Route element={<AmTechAndPrestadorRoute />}>
-        
-          
+
+
           </Route>
 
           <Route element={<OperadoraRoute />}>
-            
-        
+
+
             {/* Other routes related to the 'OPERADORA' type user */}
           </Route>
 
           <Route element={<AmTechRoute />}>
-        
-         
+
+
           </Route>
         </>
       )}

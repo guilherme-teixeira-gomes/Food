@@ -16,7 +16,8 @@ import QuizIcon from '@mui/icons-material/Quiz';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import MenuIcon from '@mui/icons-material/Menu';
-
+import FastfoodIcon from '@mui/icons-material/Fastfood';
+import LocalDiningIcon from '@mui/icons-material/LocalDining';
 function SideBarOf() {
   const { user, handleLogout } = useContext(AuthContext);
   const location = useLocation();
@@ -86,7 +87,7 @@ function SideBarOf() {
             >
               <img
                 src={SideBarImg2}
-                alt="InConnet"
+                alt="Hungry"
                 style={{
                   height: "100%",
                   width: "150px",
@@ -113,7 +114,7 @@ function SideBarOf() {
                   marginTop: "1rem",
                 }}
               >
-                MENU PRINCIPAL
+
               </p>
 
               <div
@@ -143,7 +144,7 @@ function SideBarOf() {
                     >
                       <HomeIcon />
                     </div>
-                    HOME
+                    Home
                   </StyledButton>
                 </Link>
               </div>
@@ -151,11 +152,11 @@ function SideBarOf() {
               <div
                 style={{ width: "100%" }}
                 className={`${
-                  isActive("/chamados") ? "link-active" : ""
+                  isActive("/cadastrar-alimentos") ? "link-active" : ""
                 } position-relative`}
               >
                 <Link
-                  to="/chamados"
+                  to="/cadastrar-alimentos"
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
                   <StyledButton style={{ marginLeft: "10%" }}>
@@ -169,13 +170,13 @@ function SideBarOf() {
                         width: "30px",
                         height: "30px",
                         backgroundColor: `${
-                          isActive("/chamados") ? "#fe3b00e6" : "#fe6600"
+                          isActive("/cadastrar-alimentos") ? "#fe3b00e6" : "#fe6600"
                         }`,
                       }}
                     >
-                      <MenuIcon />
+                      <LocalDiningIcon />
                     </div>
-                    CHAMADOS
+                  Cadastrar Alimentos
                   </StyledButton>
                 </Link>
               </div>
@@ -183,11 +184,11 @@ function SideBarOf() {
               <div
                 style={{ width: "100%" }}
                 className={`${
-                  isActive("/criarchamados") ? "link-active" : ""
+                  isActive("/comidas") ? "link-active" : ""
                 } position-relative`}
               >
                 <Link
-                  to="/criarchamados"
+                  to="/comidas"
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
                   <StyledButton style={{ marginLeft: "10%" }}>
@@ -201,18 +202,18 @@ function SideBarOf() {
                         width: "30px",
                         height: "30px",
                         backgroundColor: `${
-                          isActive("/criarchamados") ? "#fe3b00e6" : "#fe6600"
+                          isActive("/comidas") ? "#fe3b00e6" : "#fe6600"
                         }`,
                       }}
                     >
-                      <PlaylistAddIcon />
+                      <FastfoodIcon />
                     </div>
-                    CRIAR CHAMADOS
+                    Comidas
                   </StyledButton>
                 </Link>
               </div>
 
-              <div
+              {/* <div
                 style={{ width: "100%" }}
                 className={`${
                   isActive("/formulario") ? "link-active" : ""
@@ -274,7 +275,7 @@ function SideBarOf() {
                     FAQ
                   </StyledButton>
                 </Link>
-              </div>
+              </div> */}
             </div>
             <Divider style={{ marginTop: "1rem" }} />
             <div

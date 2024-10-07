@@ -6,6 +6,7 @@ import ResetPassWord from "../models/ResetPassword";
 import Clientes from "../models/Clientes";
 import Administradores from "../models/Administradores";
 import SuperAdmins from "../models/SuperAdmins";
+import Comidas from "../models/Comidas";
 
 
 
@@ -17,7 +18,8 @@ const models = [
   ResetPassWord,
   Clientes,
   Administradores,
-  SuperAdmins
+  SuperAdmins,
+  Comidas
 ];
 
 sequelize.addModels(models);
