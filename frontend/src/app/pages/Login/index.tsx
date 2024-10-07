@@ -308,7 +308,7 @@ const Login = () => {
               >
                 <Grid item xs={12} style={{ textAlign: "center" }}>
                   <Link style={{color:"#fe6600"}} to="/cadastrar" className="login">
-                    Não possui conta? Cadastre-se como Prestador!
+                    Não possui conta? Cadastre-se Aqui!
                   </Link>
                 </Grid>
               </Grid>
