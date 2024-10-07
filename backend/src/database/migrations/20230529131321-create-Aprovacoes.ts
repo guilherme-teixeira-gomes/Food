@@ -23,7 +23,8 @@ module.exports = {
       },
       disponivelParaCliente: {
         type: DataTypes.BOOLEAN,
-        allowNull: false
+        allowNull: false,
+        defaultValue: true 
       },
       createdAt: {
         type: DataTypes.DATE,
