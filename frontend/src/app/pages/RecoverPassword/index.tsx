@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 
-import Logo from "../../assets/am_tech_logo.png";
+import Logo from "../../assets/hungry.png";
 import { i18n } from "../../translate/i18n";
 
 import { styled } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import { CssBaseline, Avatar, Button, Box } from "@mui/material";
+import { CssBaseline, Avatar, Button, Box, Backdrop, CircularProgress, useMediaQuery } from "@mui/material";
 import toastError from "app/errors/toastError";
 import api from "app/services/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { RoutesPath } from "app/routes/useRoutes";
+import { BackgroundImage } from "../Login/styles";
 
 const Paper = styled("div")(({ theme }) => ({
   marginTop: theme.spacing(8),
@@ -52,14 +53,14 @@ const Input = styled("input")(({ theme }) => ({
 
 const Submit = styled(Button)(({ theme }) => ({
   margin: theme.spacing(1, 0, 2),
-  backgroundColor: "#5A5A5D",
+  backgroundColor: "#fe6600",
   border: "1px solid transparent",
   color: "#fff",
 
   "&:hover": {
     backgroundColor: "#fff",
-    border: "1px solid #5A5A5D",
-    color: "#5A5A5D",
+    border: "1px solid #fe6600",
+    color: "#fe6600",
   },
 }));
 
@@ -69,7 +70,7 @@ const RecoverPassword = () => {
   const [email, setEmail] = useState({
     email: ""
   });
-
+  const isMobileScreen = useMediaQuery("only screen and (max-width: 750px)");
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Enviando email...");
@@ -96,22 +97,38 @@ const RecoverPassword = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs" style={{ maxWidth: "620px" }}>
-      <CssBaseline />
+   
+    <BackgroundImage >
+      <div>
+      </div>
+      <Box style={{
+        width: isMobileScreen ? "100vw" : "50vw",
+        height: "100vh",
+        backgroundColor: "#e6e3d9",
 
-      <Paper>
-        <Content>
-          <Avatar
-            style={{
-              margin: "0px",
-              backgroundColor: "transparent",
-              padding: "0px 1rem",
-              width: "auto",
-              height: "auto",
-            }}
-          >
-            <LogoImg src={Logo} alt="WhatsAll"></LogoImg>
-          </Avatar>
+        display: "flex",
+        border:"1px solid #001c1d",
+        justifyContent: "center",
+        alignItems: "center", // Alinha verticalmente
+        padding: isMobileScreen ? "0 2rem" : "0"
+      }}>
+        <div style={{
+          minWidth: isMobileScreen ? "90%" : "50%",
+          marginTop: isMobileScreen ? "2%" : "", // Reduzir a margem superior para mobile
+          display: 'flex',
+          
+          flexDirection: 'column',
+          alignItems: 'center' // Centraliza o conteúdo
+
+        }}>
+          <div style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: isMobileScreen ? "1%" : "3rem",
+          }}>
+            <img style={{ objectFit: "contain", width: isMobileScreen ? "200px" : "200px", height: isMobileScreen ? "200px" : "100%", }} src={Logo} />
+          </div>
+         
 
           <Typography component="h1" variant="h5">
             {i18n.t("Recuperar Senha")}
@@ -136,9 +153,19 @@ const RecoverPassword = () => {
 
             <Submit type="submit">Enviar Email</Submit>
           </BoxContent>
-        </Content>
-      </Paper>
-    </Container>
+          </div>
+      </Box>
+      {!isMobileScreen && (
+        <div style={{ width: "50%", marginTop: "8%" }}>
+
+          <div style={{ display: "flex", justifyContent: "center", marginBottom: "2%" }}>
+            <img style={{ width: "700px", height: "700px", objectFit: "contain", border: "1px solid #001c1d",boxShadow: "1px 4px 8px rgba(5, 33, 44, 0.7)", }} src={Logo} />
+          </div>
+        </div>
+      )}
+
+
+    </BackgroundImage >
   );
 };
 

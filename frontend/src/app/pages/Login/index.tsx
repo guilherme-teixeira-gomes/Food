@@ -121,7 +121,6 @@ const BackgroundDiv = styled("div")(({ theme }) => ({
 
 const Login = () => {
   const navigate = useNavigate();
-  
   const isMobileScreen = useMediaQuery("only screen and (max-width: 750px)");
   const [userData, setUserData] = useState<LoginDataTypes>({ user: "", password: "", origem: "" });
   const [rememberMe, setRememberMe] = useState(false);
