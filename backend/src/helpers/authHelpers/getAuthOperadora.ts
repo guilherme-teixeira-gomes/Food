@@ -3,7 +3,7 @@ import AppError from "../../errors/AppError";
 import authConfig from "../../config/auth";
 import { verify } from "jsonwebtoken";
 import ShowAdminId from "../../services/AdminsService/GetAdminIdService";
-import Admins from "../../models/Admins";
+import Administradores from "../../models/Administradores";
 
 interface RefreshTokenPayload {
     id: string;
@@ -11,7 +11,7 @@ interface RefreshTokenPayload {
     admin: string,
 }
 
-export const getAuthOperadora = async (req: Request): Promise<Admins> => {
+export const getAuthOperadora = async (req: Request): Promise<Administradores> => {
     const token: string = req.headers.authorization || "";
 
     if (!token) {

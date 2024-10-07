@@ -10,23 +10,25 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { i18n } from "../../translate/i18n";
 
 import { AuthContext } from "../../context/Auth/AuthContext";
-
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import { CssBaseline, Avatar, Button, Box, Grid, Card, Fade } from "@mui/material";
-import LogoFundo from "../../assets/loginfundo.png";
-import LogoCarregamento from "../../assets/logocarregamento.png";
-
+import { CssBaseline, Avatar, Button, Box, Grid, Card, Fade, useMediaQuery } from "@mui/material";
+import LogoFundo from "../../assets/hungry.png";
+import LogoCarregamento from "../../assets/hungry.png";
+import Logo from "../../assets/hungry.png";
 import { styled } from "@mui/material/styles";
 import { RoutesPath } from "app/routes/useRoutes";
 import toastError from "app/errors/toastError";
+import { BackgroundImage } from "./styles";
 
 
 const Paper = styled("div")(({ theme }) => ({
   marginTop: theme.spacing(8),
   width: "auto",
   height: "650px",
-  backgroundColor: "#fff",
+  backgroundColor: "#e6e3d9",
   borderRadius: "10px",
 }));
 
@@ -44,14 +46,14 @@ const Submit = styled(Button)(({ theme }) => ({
   margin: theme.spacing(1, 0, 2),
   backgroundColor: "#30BC65",
   border: "1px solid transparent",
-  color: "#fff",
+  color: "#e6e3d9",
   width: "300px",
-  
+
 
   "&:hover": {
     backgroundColor: "#228a4a",
     border: "1px solid #30BC65",
-    color: "#fff",
+    color: "#e6e3d9",
   },
 }));
 
@@ -119,11 +121,12 @@ const BackgroundDiv = styled("div")(({ theme }) => ({
 
 const Login = () => {
   const navigate = useNavigate();
-
+  
+  const isMobileScreen = useMediaQuery("only screen and (max-width: 750px)");
   const [userData, setUserData] = useState<LoginDataTypes>({ user: "", password: "", origem: "" });
   const [rememberMe, setRememberMe] = useState(false);
   const [open, setOpen] = React.useState(false);
-
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
   const loginStorage = localStorage.getItem("loginData");
 
   const { handleLogin, customValidation } = useContext(AuthContext);
@@ -146,10 +149,14 @@ const Login = () => {
     setUserData(prev => ({ ...prev, [e.target.name]: e.target.value.trim() }));
   };
 
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
   const login = async () => {
     const response = await handleLogin(userData, rememberMe);
     try {
-      
+
       if (response.success) {
         setTimeout(() => {
           navigate(RoutesPath.TELA_INICIAL);
@@ -172,112 +179,155 @@ const Login = () => {
   }, []);
 
   return (
-    <BackgroundDiv>
+
+    <BackgroundImage >
       <div>
 
         <Backdrop
-          sx={{ backgroundColor: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1, backgroundImage: `url(${LogoCarregamento})`, backgroundRepeat: 'no-repeat', backgroundPosition: "center 40%", transition: "opacity 0.5s" }}
+          sx={{ backgroundColor: "#fe6600", zIndex: (theme) => theme.zIndex.drawer + 1, backgroundImage: `url(${LogoCarregamento})`, backgroundRepeat: 'no-repeat', backgroundPosition: "center 40%", transition: "opacity 0.5s" }}
           open={open}
 
         >
           <CircularProgress color="inherit" />
         </Backdrop>
       </div>
-      <Container component="main" maxWidth="xs" style={{ maxWidth: "620px", alignItems: "center", justifyContent: "center" }}>
-        <CssBaseline />
-        <Paper>
-          <Card style={{ borderRadius: "22px", boxShadow: "0px 0px 24px 0px rgba(0, 0, 0, 0.25)" }}>
-            <Content>
-              <Avatar
-                style={{
-                  margin: "0px",
-                  backgroundColor: "transparent",
-                  width: "300px",
-                  height: "auto",
-                  borderRadius: "0px"
-                }}
-              >
-                {/* <LockOutlinedIcon /> */}
-              </Avatar>
+      <Box style={{
+        width: isMobileScreen ? "100vw" : "50vw",
+        height: "100vh",
+        backgroundColor: "#e6e3d9",
 
+        display: "flex",
+        border:"1px solid #001c1d",
+        justifyContent: "center",
+        alignItems: "center", // Alinha verticalmente
+        padding: isMobileScreen ? "0 2rem" : "0"
+      }}>
+        <div style={{
+          minWidth: isMobileScreen ? "90%" : "50%",
+          marginTop: isMobileScreen ? "2%" : "", // Reduzir a margem superior para mobile
+          display: 'flex',
+          
+          flexDirection: 'column',
+          alignItems: 'center' // Centraliza o conteúdo
 
-              <Formik
-                initialValues={userData}
-                // validationSchema={LoginSchema}
-                onSubmit={(values, actions) => {
-                  login();
-                  actions.setSubmitting(false);
-                }}
-              >
-                <Form style={{ width: "100%", marginTop: "1rem" }}>
+        }}>
+          <div style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: isMobileScreen ? "1%" : "5rem",
+          }}>
+            <img style={{ objectFit: "contain", width: isMobileScreen ? "200px" : "200px", height: isMobileScreen ? "200px" : "100%", }} src={Logo} />
+          </div>
+         
+          <Formik
+            initialValues={userData}
+            // validationSchema={LoginSchema}
+            onSubmit={(values, actions) => {
+              login();
+              actions.setSubmitting(false);
+            }}
+          >
+            <Form style={{
+              width: '100%',
+              
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "1rem"
+            }}>
+              <input
+                type="text"
+                className="form-control form-control-lg"
+                name="user"
+                id="user"
+                placeholder="E-mail"
+                value={userData.user}
+                data-kt-search-element="input"
+                onChange={handleChangeInput}
+                style={{ width: '100%', marginBottom: "1rem" }}
+              />
+
+              <div className="password-container" style={{ position: 'relative', width: '100%', marginBottom: '1rem' }}>
+                <input
+                  type={passwordVisible ? 'text' : 'password'}
+                  className="form-control form-control-lg"
+                  name="password"
+                  id="password"
+                  placeholder="Senha"
+                  value={userData.password}
+                  data-kt-search-element="input"
+                  onChange={handleChangeInput}
+                  style={{ width: '100%' }}
+                />
+                <span
+                  className="password-icon"
+                  id="togglePassword"
+                  onClick={togglePasswordVisibility}
+                  style={{ cursor: 'pointer', position: 'absolute', top: '50%', right: '1rem', transform: 'translateY(-50%)' }}
+                >
+                  {passwordVisible ? <VisibilityOffIcon  style={{color:"#fe6600"}}/> : <RemoveRedEyeIcon style={{color:"#fe6600"}} />}
+                </span>
+              </div>
+
+              <div style={{
+                display: "flex",
+                alignItems: "center",
+                width: "100%",
+                justifyContent: "space-between",
+                marginBottom: "1rem"
+              }}>
+                <div style={{ display: "flex", alignItems: "center" }}>
                   <input
-                    type="text"
-                    className="form-control form-control-lg"
-                    name="user"
-                    id="user"
-                    placeholder="E-mail"
-                    value={userData.user}
-                    data-kt-search-element="input"
-                    onChange={handleChangeInput}
-                    style={{ marginTop: ".8rem", marginBottom: "1.4rem" }}
+                    id="check"
+                    type="checkbox"
+                    checked={rememberMe}
+                    onChange={() => setRememberMe(!rememberMe)}
+                    style={{ marginRight: "0.5rem" }}
                   />
+                  <Label htmlFor="check">Lembrar meus Dados</Label>
+                </div>
+                <Forget to={"/recuperar/senha"} style={{ display: 'flex', alignItems: 'center' }}>
+                  <LockOutlinedIcon color="disabled" /> Esqueceu sua senha?
+                </Forget>
+              </div>
 
-                  <input
-                    type="password"
-                    className="form-control form-control-lg"
-                    name="password"
-                    id="password"
-                    placeholder="Senha"
-                    value={userData.password}
-                    onChange={handleChangeInput}
-                    style={{ marginTop: ".8rem", marginBottom: "1.4rem" }}
-                  />
-                  <ForgetBox>
-                    <Forget to={"/recuperar/senha"} style={{ color: "#30BC65" }}>
-                      Esqueceu sua senhas?
-                    </Forget>
-                  </ForgetBox>
-                 
-                  <LinksContainer>
-                    <PasswordInput>
-                      <input
-                        style={{
-                          width: "16px",
-                          height: "16px",
-                          borderRadius: "5px",
-                        }}
-                        id="check"
-                        type="checkbox"
-                        checked={rememberMe}
-                        onChange={() => setRememberMe(!rememberMe)}
-                      />
-                      <Label htmlFor="check" style={{ color: "#30BC65" }}>Lembrar meus dados</Label>
-                    </PasswordInput>
+              <Button style={{
+                backgroundColor: "#fe6600",
+                width: "80%",
+                height: "50px",
+                borderRadius: "px",
+                color: "#e6e3d9",
+                marginBottom: '1rem'
+              }} type="submit">Entrar</Button>
+
+              <Grid
+                container
+                alignItems={"center"}
+                justifyContent={"center"}
+                style={{ padding: "0 10px" }}
+                component={"div"}
+              >
+                <Grid item xs={12} style={{ textAlign: "center" }}>
+                  <Link style={{color:"#fe6600"}} to="/cadastrar" className="login">
+                    Não possui conta? Cadastre-se como Prestador!
+                  </Link>
+                </Grid>
+              </Grid>
+            </Form>
+          </Formik>
+        </div>
+      </Box>
+      {!isMobileScreen && (
+        <div style={{ width: "50%", marginTop: "8%" }}>
+
+          <div style={{ display: "flex", justifyContent: "center", marginBottom: "2%" }}>
+            <img style={{ width: "700px", height: "700px", objectFit: "contain", border: "1px solid #001c1d",boxShadow: "1px 4px 8px rgba(5, 33, 44, 0.7)", }} src={Logo} />
+          </div>
+        </div>
+      )}
 
 
-
-                    <Submit type="submit" onClick={handleLoginAndClose}>
-                      {i18n.t("login.buttons.submit")}
-                    </Submit>
-
-
-                    <Grid
-                      container
-                      alignItems={"center"}
-                      justifyContent={"center"}
-                      style={{ padding: "0px 10px", margin: "1rem 0" }}
-                      component={"div"}
-                    >
-                    </Grid>
-                  </LinksContainer>
-                </Form>
-              </Formik>
-            </Content>
-          </Card>
-        </Paper>
-        <Box mt={8}>{/* <Copyright /> */}</Box>
-      </Container>
-    </BackgroundDiv>
+    </BackgroundImage >
   );
 };
 

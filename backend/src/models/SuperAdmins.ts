@@ -10,18 +10,15 @@ import {
   BeforeCreate,
   BeforeUpdate,
   PrimaryKey,
-  AutoIncrement,
-  HasMany,
-  BelongsToMany
+  AutoIncrement
 } from "sequelize-typescript";
 import { hash, compare } from "bcryptjs";
 
-
 @Table({
-  tableName: "Admins",
+  tableName: "SuperAdmins",
   timestamps: true
 })
-class Admins extends Model<Admins> {
+class SuperAdmins extends Model<SuperAdmins> {
   @PrimaryKey
   @AutoIncrement
   @Column
@@ -35,7 +32,7 @@ class Admins extends Model<Admins> {
 
   @Column(DataType.STRING)
   email: string;
-
+  
   @Column(DataType.STRING)
   usuario: string;
 
@@ -44,9 +41,6 @@ class Admins extends Model<Admins> {
 
   @Column(DataType.STRING)
   passwordHash: string;
-
-  @Column(DataType.STRING)
-  whatsapp: string;
 
   @Column(DataType.STRING)
   tokenHash: string;
@@ -59,7 +53,7 @@ class Admins extends Model<Admins> {
 
   @BeforeUpdate
   @BeforeCreate
-  static hashPassword = async (customer: Admins): Promise<void> => {
+  static hashPassword = async (customer: SuperAdmins): Promise<void> => {
     if (customer.password) {
       customer.passwordHash = await hash(customer.password, 8);
     }
@@ -71,4 +65,4 @@ class Admins extends Model<Admins> {
   };
 }
 
-export default Admins;
+export default SuperAdmins;

@@ -1,8 +1,8 @@
 import { WhereOptions, Sequelize } from "sequelize";
-import UserCustomer from "../../models/UserCustomer";
+import Clientes from "../../models/Clientes";
 
 interface Return {
-    data: UserCustomer[],
+    data: Clientes[],
     total: number,
     totalPages: number,
 }
@@ -17,11 +17,11 @@ const ShowUsersTableService = async (page: number, operadoraId: number | null): 
         where.operadoraId = operadoraId;
     }
 
-    const prestadores = await UserCustomer.findAll({
+    const prestadores = await Clientes.findAll({
         attributes: {
             include: [
                 'id', 'name', 'email', 'status', 'crm', 'createdAt', 'motivo_recusa', 'operadoraId', 'isEspecialistaAmtech', 'fase',
-                [Sequelize.literal(`(select count(*) as qtd_procedimentos_ativos from prestadorProcedimento as pp where pp.prestadorId = UserCustomer.id and pp.status in ("EM ANALISE", "DEVOLUTIVA", "INFORMAÇÕES/RELATÓRIO SOLICITADOS","NOVO EXAME"))`), `qtd_procedimentos_ativos`]
+                [Sequelize.literal(`(select count(*) as qtd_procedimentos_ativos from prestadorProcedimento as pp where pp.prestadorId = Clientes.id and pp.status in ("EM ANALISE", "DEVOLUTIVA", "INFORMAÇÕES/RELATÓRIO SOLICITADOS","NOVO EXAME"))`), `qtd_procedimentos_ativos`]
             ]
         },
         // limit: limit,
@@ -33,7 +33,7 @@ const ShowUsersTableService = async (page: number, operadoraId: number | null): 
         order: [["createdAt", "DESC"]]
     });
 
-    const count = await UserCustomer.count();
+    const count = await Clientes.count();
 
     const totalPages = Math.ceil(count / limit);
 

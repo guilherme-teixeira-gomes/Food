@@ -3,7 +3,7 @@ import { QueryInterface, DataTypes } from "sequelize";
 
 module.exports = {
   up: (queryInterface: QueryInterface) => {
-    return queryInterface.createTable("UserCustomer", {
+    return queryInterface.createTable("Administradores", {
       id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -23,20 +23,27 @@ module.exports = {
         allowNull: false,
         unique: true
       },
-      crm: {
+      service: {
         type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-      },
-      uf: {
-        type: DataTypes.STRING(2),
-        allowNull: true
+        allowNull: false
       },
       usuario: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
       },
       passwordHash: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      whatsapp: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      uf: {
+        type: DataTypes.STRING(2),
+        allowNull: false
+      },
+      cep: {
         type: DataTypes.STRING,
         allowNull: false
       },
@@ -56,6 +63,6 @@ module.exports = {
   },
 
   down: (queryInterface: QueryInterface) => {
-    return queryInterface.dropTable("UserCustomer");
+    return queryInterface.dropTable("Administradores");
   }
 };

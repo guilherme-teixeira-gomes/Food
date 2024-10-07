@@ -1,9 +1,9 @@
-import UserCustomer from "../../models/UserCustomer";
+import Clientes from "../../models/Clientes";
 import AppError from "../../errors/AppError";
 
 /* eslint-disable */
 const ShowUserService = async (id: string | number) => {
-  const user = await UserCustomer.findByPk(id, {
+  const user = await Clientes.findByPk(id, {
     attributes: ["id", "admin", "name",
       "email", "crm", "uf",
       "usuario", "passwordHash", "tokenHash",

@@ -1,10 +1,10 @@
 /* eslint-disable */
-import Admins from "../../models/Admins";
+import Administradores from "../../models/Administradores";
 import AppError from "../../errors/AppError";
-import Amtechs from "../../models/Amtechs";
+import SuperAdmins from "../../models/SuperAdmins";
 
-const ShowOperatorAmtechService = async () => {
-  const amtech = await Admins.findAll({
+const ShowAllAdminService = async () => {
+  const amtech = await Administradores.findAll({
     attributes: [
       "id",
       "admin",
@@ -24,4 +24,4 @@ const ShowOperatorAmtechService = async () => {
   return amtech;
 };;
 
-export default ShowOperatorAmtechService;
+export default ShowAllAdminService;

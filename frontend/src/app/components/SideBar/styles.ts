@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledButton = styled.button`
   position: relative; /* Importante para o posicionamento absoluto */
   width: 90%;
-  background-color: #202125 ;
+  background-color: #fe6600 ;
   gap: 1rem;
   color: #fff;
   padding: 8px 0px;

@@ -1,9 +1,9 @@
 import AppError from "../../errors/AppError";
-import UserCustomer from "../../models/UserCustomer";
+import Clientes from "../../models/Clientes";
 
 interface Return {
     msg: string,
-    user: UserCustomer
+    user: Clientes
 }
 
 interface Body {
@@ -25,7 +25,7 @@ interface Body {
 }
 
 const UpdateMedicoPerfilService = async (id: number | string, body: Body): Promise<Return> => {
-    const medico = await UserCustomer.findByPk(id);
+    const medico = await Clientes.findByPk(id);
 
     if (!medico) {
         throw new AppError("Medico não encontrado!");

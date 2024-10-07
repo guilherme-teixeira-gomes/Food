@@ -6,13 +6,13 @@ import SideBarOf from "app/components/SideBar";
 function TelaInicial() {
   return (
     
-    <div className="d-flex" style={{ backgroundColor: "#202125" }}>
+    <div className="d-flex">
       <SideBarOf />
       
 
       <div
         style={{
-          backgroundColor: "#fff",
+    
           
           width: "100%",
           height: "100vh",

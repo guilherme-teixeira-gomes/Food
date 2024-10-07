@@ -147,7 +147,7 @@ const useAuth = () => {
       api.defaults.headers.Authorization = undefined;
 
       setLoading(false);
-      history(RoutesPath.LOGIN_MEDICO);
+      history(RoutesPath.LOGIN);
     } catch (err) {
       toastError(err);
       setLoading(false);

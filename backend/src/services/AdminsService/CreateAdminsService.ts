@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import { hash } from "bcryptjs";
 
 import AppError from "../../errors/AppError";
-import Admins from "../../models/Admins";
+import Administradores from "../../models/Administradores";
 import { Op } from "sequelize";
 
 interface Request {
@@ -61,7 +61,7 @@ const CreateAdminService = async ({
     throw new AppError(err.message);
   }
 
-  const adminExists = await Admins.findOne({
+  const adminExists = await Administradores.findOne({
     where: {
       [Op.or]: [{ email: email }, { usuario: usuario }]
     }
@@ -73,7 +73,7 @@ const CreateAdminService = async ({
 
   const hashedPassword = await hash(password, 8);
 
-  const Admin = await Admins.create({
+  const Admin = await Administradores.create({
     admin,
     name,
     email,

@@ -25,7 +25,7 @@ import Configuracoes from "app/pages/Configuracoes"
 import Faq from "app/pages/Faq";
 
 export enum RoutesPath {
-  LOGIN_MEDICO = "/login",
+  LOGIN = "/login",
 
 
   TELA_INICIAL = "/home",
@@ -95,7 +95,7 @@ const ProviderRoutes = () => {
 
   return (
     <Routes>
-      <Route path={RoutesPath.LOGIN_MEDICO} element={<Login />} />
+      <Route path={RoutesPath.LOGIN} element={<Login />} />
       <Route path={RoutesPath.RECOVER_PASSWORD} element={<RecoverPassword />} />
       <Route path={RoutesPath.TELA_INICIAL} element={<TelaInicial />} />
       <Route path={RoutesPath.CRIAR_CHAMADOS} element={<CriarChamados />} />

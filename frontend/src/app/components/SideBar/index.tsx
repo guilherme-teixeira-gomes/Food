@@ -1,6 +1,6 @@
 import { Avatar, Box, Button, Divider, Drawer } from "@mui/material";
 import React, { useContext, useState } from "react";
-import SideBarImg2 from "../../assets/iconsidebar2.png";
+import SideBarImg2 from "../../assets/hungryss.png";
 import AppsIcon from "@mui/icons-material/Apps";
 import * as S from "./styles";
 import { StyledButton, efeitoxd } from "./styles";
@@ -48,7 +48,7 @@ function SideBarOf() {
     padding: "7%",
     width: "30px",
     height: "30px",
-    backgroundColor: hovered ? "#f12525" : "#35363a",
+    backgroundColor: hovered ? "#f12525" : "#fe6600",
     transition: "background-color 0.3s",
   };
 
@@ -60,7 +60,7 @@ function SideBarOf() {
           variant="permanent"
           style={{
             color: "black",
-            backgroundColor: "#202125",
+            backgroundColor: "#fe6600",
             height: "auto",
             width: "300px",
           }}
@@ -69,8 +69,8 @@ function SideBarOf() {
             width="300px"
             height="100vh"
             style={{
-              backgroundColor: "#202125",
-              border: "#202125",
+              backgroundColor: "#fe6600",
+              border: "#fe6600",
               position: "fixed",
               top: 0,
               left: 0,
@@ -88,9 +88,9 @@ function SideBarOf() {
                 src={SideBarImg2}
                 alt="InConnet"
                 style={{
-                  height: "63px",
-                  width: "248px",
-                  backgroundColor: "#202125",
+                  height: "100%",
+                  width: "150px",
+                  backgroundColor: "#fe6600",
                   margin: "50px 50px",
                 }}
               />
@@ -137,7 +137,7 @@ function SideBarOf() {
                         width: "30px",
                         height: "30px",
                         backgroundColor: `${
-                          isActive("/home") ? "#30BC65" : "#35363a"
+                          isActive("/home") ? "#fe3b00e6" : "#fe6600"
                         }`,
                       }}
                     >
@@ -169,7 +169,7 @@ function SideBarOf() {
                         width: "30px",
                         height: "30px",
                         backgroundColor: `${
-                          isActive("/chamados") ? "#30BC65" : "#35363a"
+                          isActive("/chamados") ? "#fe3b00e6" : "#fe6600"
                         }`,
                       }}
                     >
@@ -201,7 +201,7 @@ function SideBarOf() {
                         width: "30px",
                         height: "30px",
                         backgroundColor: `${
-                          isActive("/criarchamados") ? "#30BC65" : "#35363a"
+                          isActive("/criarchamados") ? "#fe3b00e6" : "#fe6600"
                         }`,
                       }}
                     >
@@ -233,7 +233,7 @@ function SideBarOf() {
                         width: "30px",
                         height: "30px",
                         backgroundColor: `${
-                          isActive("/formulario") ? "#30BC65" : "#35363a"
+                          isActive("/formulario") ? "#fe3b00e6" : "#fe6600"
                         }`,
                       }}
                     >
@@ -265,7 +265,7 @@ function SideBarOf() {
                         width: "30px",
                         height: "30px",
                         backgroundColor: `${
-                          isActive("/faq") ? "#30BC65" : "#35363a"
+                          isActive("/faq") ? "#fe3b00e6" : "#fe6600"
                         }`,
                       }}
                     >
@@ -319,7 +319,7 @@ function SideBarOf() {
                         width: "30px",
                         height: "30px",
                         backgroundColor: `${
-                          isActive("/perfil") ? "#30BC65" : "#35363a"
+                          isActive("/perfil") ? "#fe3b00e6" : "#fe6600"
                         }`,
                       }}
                     >
@@ -351,7 +351,7 @@ function SideBarOf() {
                         width: "30px",
                         height: "30px",
                         backgroundColor: `${
-                          isActive("/configuracoes") ? "#30BC65" : "#35363a"
+                          isActive("/configuracoes") ? "#fe3b00e6" : "#fe6600"
                         }`,
                       }}
                     >

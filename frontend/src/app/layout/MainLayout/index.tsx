@@ -18,7 +18,7 @@ import Notification from "app/components/Layout/Notification";
 import Switch from '@mui/material/Switch';
 import ChatIcon from '@mui/icons-material/Chat';
 import AMTechLogo from "./../../assets/avatar.png";
-import { Procedimento, UserCustomer } from "./interface";
+import { Procedimento, Clientes } from "./interface";
 import SideBarOf from "app/components/SideBar";
 
 const styleModalConfirmaInativar = {

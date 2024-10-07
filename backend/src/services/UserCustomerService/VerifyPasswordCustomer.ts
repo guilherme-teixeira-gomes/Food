@@ -2,7 +2,7 @@
 // /* eslint-disable @typescript-eslint/ban-types */
 // import * as Yup from "yup";
 // import AppError from "../../errors/AppError";
-// import UserCustomer from "../../models/UserCustomer";
+// import Clientes from "../../models/Clientes";
 
 // const VerifyPasswordCustomerService = async (
 //   password: string
@@ -19,7 +19,7 @@
 //     throw new AppError(err.message);
 //   }
 
-//   const checkPassword = await UserCustomer
+//   const checkPassword = await Clientes
 // };
 
 // export default VerifyPasswordCustomerService;

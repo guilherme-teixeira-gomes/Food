@@ -2,16 +2,17 @@
 import { Router } from "express";
 
 import authRoutes from "./authRoutes";
-import medicoRoutes from "./medicoRoutes";
-import adminRoutes from "./AdminsRoutes";
-import amtechRoutes from "./AmtechRoutes";
+import AdminsRoutes from "./AdminsRoutes";
+import ClientesRoutes from "./ClientesRoutes";
+import SuperAdminRoutes from "./SuperAdminRoutes";
+
 
 const routes = Router();
 
 routes.use("/auth", authRoutes);
-routes.use(adminRoutes);
-routes.use(amtechRoutes);
-routes.use(medicoRoutes);
+routes.use(AdminsRoutes);
+routes.use(ClientesRoutes);
+routes.use(SuperAdminRoutes);
 
 
 export default routes;

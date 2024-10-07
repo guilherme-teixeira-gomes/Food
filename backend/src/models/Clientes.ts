@@ -18,10 +18,10 @@ import { hash, compare } from "bcryptjs";
 
 
 @Table({
-  tableName: "UserCustomer",
+  tableName: "Clientes",
   timestamps: true
 })
-class UserCustomer extends Model<UserCustomer> {
+class Clientes extends Model<Clientes> {
   @PrimaryKey
   @AutoIncrement
   @Column
@@ -62,7 +62,7 @@ class UserCustomer extends Model<UserCustomer> {
 
   @BeforeUpdate
   @BeforeCreate
-  static hashPassword = async (customer: UserCustomer): Promise<void> => {
+  static hashPassword = async (customer: Clientes): Promise<void> => {
     if (customer.password) {
       customer.passwordHash = await hash(customer.password, 8);
     }
@@ -74,4 +74,4 @@ class UserCustomer extends Model<UserCustomer> {
   };
 }
 
-export default UserCustomer;
+export default Clientes;

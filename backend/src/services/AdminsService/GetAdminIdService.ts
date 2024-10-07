@@ -1,9 +1,9 @@
 /* eslint-disable */
-import Admins from "../../models/Admins";
+import Administradores from "../../models/Administradores";
 import AppError from "../../errors/AppError";
 
 const ShowAdminId = async (id: string | number) => {
-  const user = await Admins.findByPk(id, {
+  const user = await Administradores.findByPk(id, {
     attributes: [
       "id",
       "admin",

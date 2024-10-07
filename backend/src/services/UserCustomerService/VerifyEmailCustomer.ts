@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import * as Yup from "yup";
 import AppError from "../../errors/AppError";
-import UserCustomer from "../../models/UserCustomer";
+import Clientes from "../../models/Clientes";
 
 const VerifyEmailCustomerService = async (email: string): Promise<Boolean> => {
   const schema = Yup.object().shape({
@@ -17,7 +17,7 @@ const VerifyEmailCustomerService = async (email: string): Promise<Boolean> => {
     throw new AppError(err.message);
   }
 
-  const customerExists = await UserCustomer.findOne({ where: { email } });
+  const customerExists = await Clientes.findOne({ where: { email } });
 
   if (customerExists) {
     throw new AppError("E-mail já cadastrado.", 409);

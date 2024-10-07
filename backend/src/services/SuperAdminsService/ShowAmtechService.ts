@@ -1,10 +1,10 @@
 /* eslint-disable */
-import Admins from "../../models/Admins";
+import Administradores from "../../models/Administradores";
 import AppError from "../../errors/AppError";
-import Amtechs from "../../models/Amtechs";
+import SuperAdmins from "../../models/SuperAdmins";
 
 const ShowAmtechService = async (id: string | number) => {
-  const amtech = await Amtechs.findByPk(id, {
+  const amtech = await SuperAdmins.findByPk(id, {
     attributes: [
       "id",
       "admin",

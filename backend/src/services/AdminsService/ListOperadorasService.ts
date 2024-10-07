@@ -1,11 +1,11 @@
-import Admins from "../../models/Admins"
+import Administradores from "../../models/Administradores"
 
 interface Reponse {
-    data: Admins[]
+    data: Administradores[]
 }
 
 export const ListOperadorasService = async (): Promise<Reponse> => {
-    const admins = await Admins.findAll({
+    const admins = await Administradores.findAll({
         attributes: [
             "id",
             "name",

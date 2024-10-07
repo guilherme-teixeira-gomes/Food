@@ -3,8 +3,8 @@ import * as Yup from "yup";
 import { hash } from "bcryptjs";
 
 import AppError from "../../errors/AppError";
-import UserCustomer from "../../models/UserCustomer";
 import { Op } from "sequelize";
+import Clientes from "../../models/Clientes";
 
 interface Request {
   name: string;
@@ -31,7 +31,7 @@ interface Response {
   usuario: string;
 }
 
-const CreateUserCustomerService = async ({ name, email, crm, usuario, password, isEspecialistaAmtech, operadoraId, rg, cpf, tipoDocumento }: Request): Promise<Response> => {
+const CreateClientesService = async ({ name, email, crm, usuario, password, isEspecialistaAmtech, operadoraId, rg, cpf, tipoDocumento }: Request): Promise<Response> => {
   const schema = Yup.object().shape({
     name: Yup.string().required(),
     email: Yup.string().email().required(),
@@ -72,7 +72,7 @@ const CreateUserCustomerService = async ({ name, email, crm, usuario, password, 
   }
 
   if (outputCrm) {
-    const customerExists = await UserCustomer.findOne({
+    const customerExists = await Clientes.findOne({
       where: {
         [Op.or]: [{ email: email }, { crm: outputCrm }]
       }
@@ -85,12 +85,12 @@ const CreateUserCustomerService = async ({ name, email, crm, usuario, password, 
 
   const hashedPassword = await hash(password, 8);
 
-  const customer = await UserCustomer.create({
+  const customer = await Clientes.create({
     name,
     email,
     crm: outputCrm,
     usuario,
-    admin: "MEDICO",
+    admin: "CLIENTES",
     status: isEspecialistaAmtech ? 'INCOMPLETO' : 'APROVADO',
     isEspecialistaAmtech,
     operadoraId,
@@ -112,4 +112,4 @@ const CreateUserCustomerService = async ({ name, email, crm, usuario, password, 
   };
 };
 
-export default CreateUserCustomerService;
+export default CreateClientesService;

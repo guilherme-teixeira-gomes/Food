@@ -5,14 +5,14 @@ module.exports = {
   up: async (queryInterface: QueryInterface) => {
     const passwordHash = await hash("123456", 8);
     return queryInterface.bulkInsert(
-      "Amtechs",
+      "SuperAdmins",
       [
         {
-          name: "Inconnet",
-          id: 1,
-          email: "inconnet@admin.com",
-          usuario: "amtechuser",
-          admin: "AMTECH",
+          name: "SuperAdmin",
+          id: 2,
+          email: "super@admin.com",
+          usuario: "SuperAdmin",
+          admin: "SUPERADMIN",
           passwordHash,
           createdAt: new Date(),
           updatedAt: new Date()
@@ -23,6 +23,6 @@ module.exports = {
   },
 
   down: (queryInterface: QueryInterface) => {
-    return queryInterface.bulkDelete("Amtechs", {});
+    return queryInterface.bulkDelete("SuperAdmins", {});
   }
 };

@@ -1,8 +1,8 @@
 import AppError from "../../errors/AppError";
-import UserCustomer from "../../models/UserCustomer";
+import Clientes from "../../models/Clientes";
 
 export const FinalizarPeriodoAusenciaService = async (id: string | number) => {
-    const prestador = await UserCustomer.findByPk(id);
+    const prestador = await Clientes.findByPk(id);
 
     if (!prestador) {
         throw new AppError("Prestador não encontrado!", 404);

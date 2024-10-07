@@ -22,7 +22,7 @@ export interface Procedimento {
     beneficiarioInfo: Beneficiario[],
 }
 
-export interface UserCustomer {
+export interface Clientes {
     id: number,
     name: string,
     inativo: boolean,

@@ -1,7 +1,6 @@
 /* eslint-disable */
 import { Request, Response } from "express";
 import AppError from "../errors/AppError";
-import CreateUserCustomerService from "../services/UserCustomerService/CreateUserCustomer";
 import VerifyEmailCustomerService from "../services/UserCustomerService/VerifyEmailCustomer";
 import VerifyCRMCustomerService from "../services/UserCustomerService/VerifyCrmCustomer";
 import ShowUsersTableService from "../services/UserServices/ShowUsersTableService";
@@ -15,6 +14,7 @@ import { getAuthOperadora } from "../helpers/authHelpers/getAuthOperadora";
 import ShowEspecialistaTableService from "../services/UserServices/ShowEspecialistaTableService";
 import { SetPeriodoAusenciaService } from "../services/UserServices/SetPeriodoAusenciaService";
 import { FinalizarPeriodoAusenciaService } from "../services/UserServices/FinalizarPeriodoAusenciaService";
+import CreateClientesService from "../services/UserCustomerService/CreateClientesService";
 
 type IndexQuery = {
   searchParam: string;
@@ -25,7 +25,7 @@ export const store = async (req: Request, res: Response): Promise<Response> => {
   const { name, email, crm, uf, usuario, password, isEspecialistaAmtech, operadoraId, rg, cpf, fase, tipoDocumento } = req.body;
 
   try {
-    const data = await CreateUserCustomerService({
+    const data = await CreateClientesService({
       name,
       email,
       crm,

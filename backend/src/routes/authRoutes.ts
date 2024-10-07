@@ -2,34 +2,31 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Router } from "express";
 import * as SessionController from "../controllers/SessionController";
-import * as UserCustomerController from "../controllers/UserCustomerController";
+import * as ClientesController from "../controllers/ClientesController";
 import * as RecoverPassword from "../controllers/RecoverPasswordController";
 import * as AdminsController from "../controllers/AdminsController";
-
-import * as AmtechController from "../controllers/AmtechController";
+import * as SuperAdminController from "../controllers/SuperAdminController";
 import isAuth from "../middleware/isAuth";
 
 const authRoutes = Router();
 
-authRoutes.post("/signup", UserCustomerController.store);
+authRoutes.post("/signup", ClientesController.store);
 
-authRoutes.post("/verifyEmail", UserCustomerController.VerifyEmailUser);
+authRoutes.post("/verifyEmail", ClientesController.VerifyEmailUser);
 
-authRoutes.post("verifyCrm", UserCustomerController.VerifyCrmUser);
+authRoutes.post("verifyCrm", ClientesController.VerifyCrmUser);
 
 authRoutes.post("/login", SessionController.store);
 
-authRoutes.post("/update-password", UserCustomerController.updatePassword);
+authRoutes.post("/update-password", ClientesController.updatePassword);
 
 authRoutes.post("/signup_admin", AdminsController.store);
 
-authRoutes.post("/signup_amtech", AmtechController.storeUsuarioAmtech);
+authRoutes.post("/signup_super", SuperAdminController.store);
 
 authRoutes.delete("/logout", SessionController.remove);
 
 authRoutes.post("/refresh_token", SessionController.update);
-
-authRoutes.post("/refresh_admin_token", SessionController.updateAdmin);
 
 authRoutes.post("/recover_password", RecoverPassword.store);
 

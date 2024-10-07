@@ -86,7 +86,7 @@ const RecoverPassword = () => {
         toast.success("Notificação de acesso enviado para o seu E-mail");
 
         setTimeout(() => {
-          navigate(RoutesPath.LOGIN_MEDICO)
+          navigate(RoutesPath.LOGIN)
         }, 2000)
       }
     } catch (error) {

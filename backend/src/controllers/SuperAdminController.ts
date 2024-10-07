@@ -3,19 +3,19 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response } from "express";
 import AppError from "../errors/AppError";
-import ShowAdminId from "../services/AdminsService/GetAdminIdService";
-import CreateAmtechService from "../services/AmtechService/CreateAmtechService";
-import ShowAmtechId from "../services/AmtechService/ShowAmtechIdService";
-import ShowAdmAmtechId from "../services/AmtechService/GetAdmAmtechIdService";
-import ShowOperatorAmtechService from "../services/AmtechService/ShowOperatorAmtechService";
+import CreateSuperAdminService from "../services/SuperAdminsService/CreateSuperAdminService";
+import ShowSuperAdmins from "../services/SuperAdminsService/ShowSuperAdmins";
+import ShowAllAdminService from "../services/SuperAdminsService/ShowAllAdminService";
+import ShowSuperByIdService from "../services/SuperAdminsService/ShowSuperByIdService";
 
 
-export const storeUsuarioAmtech = async (req: Request, res: Response): Promise<Response> => {
+
+export const store = async (req: Request, res: Response): Promise<Response> => {
   const { admin, name, email, password, usuario } =
     req.body;
 
   try {
-    const data = await CreateAmtechService({
+    const data = await CreateSuperAdminService({
       admin,
       name,
       email,
@@ -35,14 +35,14 @@ export const storeUsuarioAmtech = async (req: Request, res: Response): Promise<R
   }
 };
 
-export const getAmtechById = async (
+export const show = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
   const {  } = req.params;
 
   try {
-    const data = await ShowAmtechId();
+    const data = await ShowSuperAdmins();
 
     return res.status(200).json({data})
   } catch (error) {
@@ -56,14 +56,14 @@ export const getAmtechById = async (
   }
 };
 
-export const getAdmAmtechById = async (
+export const showById = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
   const { id } = req.params;
 
   try {
-    const data = await ShowAdmAmtechId(id);
+    const data = await ShowSuperByIdService(id);
 
     return res.status(200).json({data})
   } catch (error) {
@@ -77,14 +77,14 @@ export const getAdmAmtechById = async (
   }
 };
 
-export const getOperatorAmtechById = async (
+export const showAllAdmin = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
   const { id } = req.params;
 
   try {
-    const data = await ShowOperatorAmtechService();
+    const data = await ShowAllAdminService();
 
     return res.status(200).json({data})
   } catch (error) {

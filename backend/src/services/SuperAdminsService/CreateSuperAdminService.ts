@@ -3,9 +3,9 @@ import * as Yup from "yup";
 import { hash } from "bcryptjs";
 
 import AppError from "../../errors/AppError";
-import Admins from "../../models/Admins";
+import Administradores from "../../models/Administradores";
 import { Op } from "sequelize";
-import Amtechs from "../../models/Amtechs";
+import SuperAdmins from "../../models/SuperAdmins";
 
 interface Request {
   admin: string;
@@ -24,7 +24,7 @@ interface Response {
 
 }
 
-const CreateAmtechService = async ({
+const CreateSuperAdminService = async ({
   admin,
   name,
   email,
@@ -52,19 +52,19 @@ const CreateAmtechService = async ({
     throw new AppError(err.message);
   }
 
-  const adminExists = await Amtechs.findOne({
+  const superexist = await SuperAdmins.findOne({
     where: {
       [Op.or]: [{ email: email }, { usuario: usuario }]
     }
   });
 
-  if (adminExists) {
+  if (superexist) {
      throw new AppError("E-mail ou Usuário já cadastrado.", 409);
   }
 
   const hashedPassword = await hash(password, 8);
 
-  const Amtech = await Amtechs.create({
+  const supers = await SuperAdmins.create({
     admin,
     name,
     email,
@@ -75,12 +75,12 @@ const CreateAmtechService = async ({
   });
 
   return {
-    id: Amtech.id,
-    admin: Amtech.admin,
-    name: Amtech.name,
-    email: Amtech.email,
-    usuario: Amtech.usuario,
+    id: supers.id,
+    admin: supers.admin,
+    name: supers.name,
+    email: supers.email,
+    usuario: supers.usuario,
   }
 };
 
-export default CreateAmtechService;
+export default CreateSuperAdminService;

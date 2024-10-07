@@ -1,5 +1,5 @@
 import AppError from "../../errors/AppError";
-import UserCustomer from "../../models/UserCustomer";
+import Clientes from "../../models/Clientes";
 
 const Sequelize = require('sequelize');
 
@@ -8,7 +8,7 @@ interface Return {
 }
 
 const UpdateMedicoStatusService = async (id: number | string, status?: string, motivo_recusa?: string): Promise<Return> => {
-    const medico = await UserCustomer.findByPk(id);
+    const medico = await Clientes.findByPk(id);
 
     if (!medico) {
         throw new AppError("Medico nao encontrado!");

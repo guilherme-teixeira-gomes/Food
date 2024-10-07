@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable import/order */
 import AppError from "../../errors/AppError";
-import Admins from "../../models/Admins";
+
 import {
   createNewAdminAccessToken,
-  createNewAdminRefreshToken
 } from "../../helpers/CreateTokens";
 import { Op } from "sequelize";
-import {
-  SerializedAdmin,
-  SerializedAdminModel
-} from "../../helpers/SerializedAdmins";
-import UserCustomer from "../../models/UserCustomer";
-import Amtechs from "../../models/Amtechs";
+
+import Administradores from "../../models/Administradores";
+import Clientes from "../../models/Clientes";
+import SuperAdmins from "../../models/SuperAdmins";
+import { SerializedModel, SerializedService } from "../../helpers/SerializedService";
+
 
 interface Request {
   user: string;
@@ -20,12 +19,12 @@ interface Request {
 }
 
 interface Response {
-  serializedAdmin: SerializedAdmin;
+  serialized: SerializedModel;
   token: string;
   // refreshToken: string;
 }
 
-const AuthAdminsService = async ({
+const AuthLoginService = async ({
   user,
   password
 }: Request): Promise<Response> => {
@@ -39,20 +38,20 @@ const AuthAdminsService = async ({
     adminInfo = user;
   }
 
-  let admin: Admins  | UserCustomer | Amtechs | null = await Admins.findOne({
+  let admin: Administradores  | Clientes | SuperAdmins | null = await Administradores.findOne({
     where: {
       [Op.or]: [{ email: adminInfo }, { usuario: adminInfo }]
     }
   });
   if (!admin) {
-    admin = await UserCustomer.findOne({
+    admin = await Clientes.findOne({
       where: {
         [Op.or]: [{ email: adminInfo }, { usuario: adminInfo }]
       }
     });
   }
   if (!admin) {
-    admin = await Amtechs.findOne({
+    admin = await SuperAdmins.findOne({
       where: {
         [Op.or]: [{ email: adminInfo }, { usuario: adminInfo }]
       }
@@ -67,15 +66,13 @@ const AuthAdminsService = async ({
   }
 
   const token = createNewAdminAccessToken(admin);
-  // const refreshToken = createNewAdminRefreshToken(admin);
 
-  const serializedAdmin = SerializedAdminModel(admin);
+  const serialized = SerializedService(admin);
 
   return {
-    serializedAdmin,
+    serialized,
     token,
-    // refreshToken
   };
 };
 
-export default AuthAdminsService;
+export default AuthLoginService;

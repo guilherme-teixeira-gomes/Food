@@ -12,7 +12,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable spaced-comment */
 import * as Yup from "yup";
-import UserCustomer from "../../models/UserCustomer";
+import Clientes from "../../models/Clientes";
 import { NodeMailer } from "../../libs/nodemailer-old";
 import ResetPassWord from "../../models/ResetPassword";
 import AppError from "../../errors/AppError";
@@ -38,7 +38,7 @@ export const SendEmailPasswordRecovery = async (
       .required()
       .test("Check-email", "Email não registrado.", async value => {
         if (!value) return false;
-        const emailExists = await UserCustomer.findOne({
+        const emailExists = await Clientes.findOne({
           where: { email: value }
         });
         return !!emailExists;
@@ -81,7 +81,7 @@ export const CreateTokenService = async (
       .required()
       .test("Check-email", "Email não registrado.", async value => {
         if (!value) return false;
-        const emailExists = await UserCustomer.findOne({
+        const emailExists = await Clientes.findOne({
           where: { email: value }
         });
         return !!emailExists;
@@ -94,7 +94,7 @@ export const CreateTokenService = async (
     throw new AppError(err.message);
   }
 
-  const verifyEmail = await UserCustomer.findAll({ where: { email }, raw: true });
+  const verifyEmail = await Clientes.findAll({ where: { email }, raw: true });
 
   if ((verifyEmail.length = 0))
     throw new AppError("E-mail ainda não cadastrado", 403);
@@ -116,8 +116,8 @@ export const VerifyTokenService = async (
   return tokenRecord;
 };
 
-export const UpdateUserPasswordByEmailService = async (emailRequest : string, newPassword: string): Promise<UserCustomer> => {
-  const user = await UserCustomer.findOne({where:{email:emailRequest}});
+export const UpdateUserPasswordByEmailService = async (emailRequest : string, newPassword: string): Promise<Clientes> => {
+  const user = await Clientes.findOne({where:{email:emailRequest}});
 
   if (!user) throw new AppError("User not found .",404);
 

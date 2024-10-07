@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Router } from "express";
-import * as AmtechController from "../controllers/AmtechController";
+import * as SuperAdminController from "../controllers/SuperAdminController";
 import isAuth from "../middleware/isAuth";
 import fs from "fs";
 import multer from "multer";
@@ -9,13 +9,13 @@ import { uploadOperadoraDoc } from "../middleware/uploadOperadoraDoc";
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 
-const amtechRoutes = Router();
+const routes = Router();
 
-amtechRoutes.get("/amtech", AmtechController.getAmtechById);
+routes.get("/super-admins", SuperAdminController.show);
 
-amtechRoutes.get("/amtech/:id", AmtechController.getAdmAmtechById);
+routes.get("/super-admins/:id", SuperAdminController.showById);
 
-amtechRoutes.get("/amtech/operadora/:id", AmtechController.getOperatorAmtechById);
+routes.get("/all/admin/:id", SuperAdminController.showAllAdmin);
 
 
-export default amtechRoutes;
+export default routes;

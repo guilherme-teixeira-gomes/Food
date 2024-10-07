@@ -1,10 +1,10 @@
 import AppError from "../../errors/AppError";
-import Admins from "../../models/Admins";
-import UserCustomer from "../../models/UserCustomer";
+import Administradores from "../../models/Administradores";
+import Clientes from "../../models/Clientes";
 
 interface Return {
     msg: string,
-    user: Admins
+    user: Administradores
 }
 
 interface Body {
@@ -23,7 +23,7 @@ interface Body {
 
 const UpdateAdminPerfilService = async (id: number | string, body: Body, avatarPath?: string  | null): Promise<Return> => {
 
-    const operador = await Admins.findByPk(id);
+    const operador = await Administradores.findByPk(id);
 
     if (!operador) {
         throw new AppError("Operador nao encontrado!");

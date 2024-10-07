@@ -1,10 +1,10 @@
 import { WhereOptions } from "sequelize";
-import UserCustomer from "../../models/UserCustomer";
+import Clientes from "../../models/Clientes";
 
 const Sequelize = require('sequelize');
 
 interface Return {
-    data: UserCustomer[],
+    data: Clientes[],
     total: number,
     totalPages: number,
 }
@@ -13,7 +13,7 @@ const ShowEspecialistaTableService = async (page: number, operadoraId: number): 
     const limit = 10;
     const offset = (page - 1) * limit;
 
-    const prestadores = await UserCustomer.findAll({
+    const prestadores = await Clientes.findAll({
         attributes: [
             'id', 'name', 'email', 'status', 'crm', 'createdAt', 'motivo_recusa', 'operadoraId', 'isEspecialistaAmtech', 'fase'
         ],
@@ -25,7 +25,7 @@ const ShowEspecialistaTableService = async (page: number, operadoraId: number): 
         order: [["createdAt", "DESC"]]
     });
 
-    const count = await UserCustomer.count();
+    const count = await Clientes.count();
 
     const totalPages = Math.ceil(count / limit);
 
