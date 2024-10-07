@@ -7,7 +7,6 @@ import Clientes from "../models/Clientes";
 import Administradores from "../models/Administradores";
 import SuperAdmins from "../models/SuperAdmins";
 import Comidas from "../models/Comidas";
-import Aprovacoes from "../models/Aprovacoes";
 
 
 
@@ -20,8 +19,7 @@ const models = [
   Clientes,
   Administradores,
   SuperAdmins,
-  Comidas,
-  Aprovacoes
+  Comidas
 ];
 
 sequelize.addModels(models);

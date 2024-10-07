@@ -3,9 +3,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response } from "express";
 import AppError from "../errors/AppError";
-
-import ShowAllFoodService from "../services/ComidaService/ShowAllFoodService";
 import CreateComidaService from "../services/ComidaService/CreateComidaService";
+import ShowAllFoodService from "../services/ComidaService/ShowAllFoodService";
 
 
 
