@@ -59,13 +59,11 @@ interface Foods {
   categoria: string;
   descricao: string;
 }
-interface PacksCompanyConfig {
+interface Aprovracao {
   id: string,
-  produtoshopid: string,
-  companyId: string,
-  active: boolean,
-  visibleToworkers: boolean,
-  visibleTocompanyadmins: boolean,
+  produtoId: string,
+  status: string,
+  disponivelParaCliente: boolean,
   createdAt: string,
   updatedAt: string,
 }
@@ -74,51 +72,57 @@ interface PacksCompanyConfig {
 function Aprovacao() {
   const [food, setFood] = useState<Foods[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [showFullDescription, setShowFullDescription] = useState<{ [key: string]: boolean }>({});
-  const label = { inputProps: { 'aria-label': 'Size switch demo' } };
+
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
-  const [isProcessingRequest, setIsProcessingRequest] = useState(false);
-  const [buyPacks, setBuyPacks] = useState<PacksCompanyConfig[]>([]);
-  const theme = useContext(ThemeContext);
+  const [buyPacks, setBuyPacks] = useState<Aprovracao[]>([]);
 
   const getPacks = async () => {
     try {
-      const params = {
-        // companyId
-      }
       const { data } = await api.get(`/show/food`,);
       setFood(data.data);
     } catch (e) {
       console.log(e);
-      setError("Erro ao obter os benefícios da empresa.");
+      setError("Erro ao obter dados do produto.");
     } finally {
       setLoading(false);
     }
   };
-
-  const handleBuyPack = async (produtoshopid: number) => {
+  const handleAproved = async (produtoId: number) => {
     try {
-      await api.post(`/sell/pacote/to-company`, {
-        produtoshopid,
-        // companyId: selectedCompany.id
+      await api.post(`/aproved/produto`, {
+        produtoId,
+        status: "Aprovado", 
       });
-
-      alert("Pacote adicionado à empresa!");
-      // history.push("/disponivel/lojinha");
-      setBuyPacks([]);
-      getPacks();
-
-      // Remove o benefício do carrinho
+  
+      alert("Produto aprovado e adicionado ao Cardápio!");
+      setBuyPacks([]);  
+      getPacks();      
     } catch (e) {
       console.log(e);
-      setError("Erro ao obter os produtos da empresa.");
+      setError("Erro ao aprovar o produto.");
     } finally {
       setLoading(false);
     }
   };
 
-
+  const handleReproved = async (produtoId: number) => {
+    try {
+      await api.post(`/reproved/produto`, {
+        produtoId,
+        status: "Reprovado", 
+      });
+  
+      alert("Produto reprovado!");
+      setBuyPacks([]);  
+      getPacks();      
+    } catch (e) {
+      console.log(e);
+      setError("Erro ao reprovado o produto.");
+    } finally {
+      setLoading(false);
+    }
+  };
   // const DeletProduto = async (id: string) => {
   //   try {
   //     const { data } = await api.delete(`/delete/produto/food/${id}`,);
@@ -143,12 +147,12 @@ function Aprovacao() {
     return 5;
   };
 
-  const toggleDescription = (id: string) => {
-    setShowFullDescription(prevState => ({
-      ...prevState,
-      [id]: !prevState[id]
-    }));
-  };
+  // const toggleDescription = (id: string) => {
+  //   setShowFullDescription(prevState => ({
+  //     ...prevState,
+  //     [id]: !prevState[id]
+  //   }));
+  // };
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
@@ -165,19 +169,6 @@ function Aprovacao() {
           <WrapperBack>
 
             <div style={{ display: "flex", justifyContent: "end", width: "92%", marginBottom: "1%", marginTop: "10px" }}>
-              <Stack direction="row" spacing={1}>
-                <Chip
-                  label="Criar Produto"
-                  style={{
-                    // backgroundColor: theme.colors.primary,
-                    // color: theme.colors.primaryContrast,
-                    fontSize: "10px",
-                    padding: "7px 7px",
-                    fontWeight: "bold",
-                  }}
-                // onClick={() => history.push('/novo/produto/food')}
-                />
-              </Stack>
             </div>
             <GridWrapper>
               {food && food.map(b => (
@@ -190,8 +181,8 @@ function Aprovacao() {
                   <Categoryaa>Categoria: {b.categoria}</Categoryaa>
                   <Description>{b.descricao}</Description>
                   <ButtonContainer>
-                    <ButtonAproved onClick={() => handleBuyPack(b.id)}>Aprovar</ButtonAproved>
-                    <ButtonReproved onClick={() => handleBuyPack(b.id)}>Reprovar</ButtonReproved>
+                  <ButtonAproved onClick={() => handleAproved(b.id)}>Aprovar</ButtonAproved>
+                    <ButtonReproved onClick={() => handleReproved(b.id)}>Reprovar</ButtonReproved>
                   </ButtonContainer>
                 </Wrapper>
               ))}
