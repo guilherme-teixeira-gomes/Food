@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicitação de Procedimento</title>
+  <style>
+    body {
+      max-width: 750px;
+      margin: auto;
+      padding: 1rem 0;
+    }
+
+    header {
+      border: 1px solid rgba(0, 0, 0, 0.8);
+      border-radius: 4px;
+      padding: 1rem;
+    }
+
+    header h2 {
+      color: rgba(0, 0, 0, 0.8);
+      padding-bottom: 1rem;
+    }
+
+    main h2 {
+      color: rgba(0, 0, 0, 0.8);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+      padding-bottom: 1rem;
+    }
+
+    .especialista-card {
+      border: 1px solid rgba(0, 0, 0, 0.8);
+      border-radius: 4px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .especialista-card span {
+      font-weight: 500;
+    }
+
+    .btn {
+      border: none;
+      font-weight: bold;
+      width: fit-content;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .btn a {
+      color: #FFF;
+      text-decoration: none;
+    }
+
+    .btn-escolher-especialista {
+      background-color: #59CEB5;
+      color: #FFF;
+      padding: 7px 15px;
+
+      margin-top: 1rem;
+    }
+
+    .btn-recusar-lista {
+      background-color: #EC536C;
+      color: #FFF;
+      padding: 7px 15px;
+    }
+
+    footer {
+      padding: 1rem 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h2>Operadora</h2>
+
+    <p>Nome: <%= operadora.name %></p>
+
+    <p>Email: <%= operadora.email %></p>
+
+    <p>
+      Especialidades para o procedimento:
+
+      <% especialidades.forEach((e,index) => { %>
+
+      <span><%= e.termo %></span>
+      <%if(index < (especialidades.lenth - 1)){%> ; <%}%>
+
+      <% }) %>
+    </p>
+
+  </header>
+
+  <main>
+    <h2>Especialistas</h2>
+
+    <% especialistas.forEach(e => { %>
+
+    <div class="especialista-card">
+      <div>
+        <p><span>Nome:</span> <%= e.name %></p>
+      </div>
+
+      <div>
+        <p><span>Email:</span> <%= e.email %></p>
+      </div>
+
+      <div>
+        <p><span>CRM:</span> <%= e.crm %></p>
+      </div>
+
+      <div>
+        <a href="<%= frontBaseUrl + "/solicitacao-procedimento/resposta?solicitacao="+ solicitacao.id + "&token=" + token.token +"&acao=escolher-especialista&especialistaId=" + e.id %>" target="_blank">
+          <button class="btn btn-escolher-especialista">
+            SELECIONAR ESPECIALISTA
+          </button>
+        </a>
+      </div>
+    </div>
+
+    <% }) %>
+  </main>
+
+</body>
+
+</html>

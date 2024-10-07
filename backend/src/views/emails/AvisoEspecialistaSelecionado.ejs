@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicitação de Procedimento</title>
+  <style>
+    body {
+      max-width: 750px;
+      margin: auto;
+      padding: 1rem 0;
+    }
+
+    header {
+      border: 1px solid rgba(0, 0, 0, 0.8);
+      border-radius: 4px;
+      padding: 1rem;
+    }
+
+    header h2 {
+      color: rgba(0, 0, 0, 0.8);
+      padding-bottom: 1rem;
+    }
+
+    main h2 {
+      color: rgba(0, 0, 0, 0.8);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+      padding-bottom: 1rem;
+    }
+
+    .especialista-card {
+      border: 1px solid rgba(0, 0, 0, 0.8);
+      border-radius: 4px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .especialista-card span {
+      font-weight: 500;
+    }
+
+    .btn {
+      border: none;
+      font-weight: bold;
+      width: fit-content;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .btn a {
+      color: #FFF;
+      text-decoration: none;
+    }
+
+    .btn-escolher-especialista {
+      background-color: #59CEB5;
+      color: #FFF;
+      padding: 7px 15px;
+
+      margin-top: 1rem;
+    }
+
+    .btn-recusar-lista {
+      background-color: #EC536C;
+      color: #FFF;
+      padding: 7px 15px;
+    }
+
+    footer {
+      padding: 1rem 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h2>Operadora</h2>
+
+    <p>Nome: <%= operadora.name %></p>
+
+    <p>Email: <%= operadora.email %></p>
+
+    <p>
+      Especialidades para o procedimento:
+
+      <% especialidades.forEach((e,index) => { %>
+
+      <span><%= e.termo %></span>
+      <%if(index < (especialidades.lenth - 1)){%> ; <%}%>
+
+      <% }) %>
+    </p>
+
+    <h2>Médico solicitante</h2>
+
+    <p>E-mail: <%= solicitacao.emailSolicitante %></p>
+
+    <p>CRM/CRO: <%= solicitacao.documentoSolicitante %></p>
+
+    <p>Telefone: <%= solicitacao.telefoneSolicitante %></p>
+
+    <!--  -->
+    <h2>Beneficiario</h2>
+
+    <p>Nome: <%= solicitacao.beneficiarioNome %></p>
+
+    <p>Data de nascimento: <%= solicitacao.beneficiarioDataNascimento %></p>
+
+    <p>Carterinha: <%= solicitacao.beneficiarioCarterinha %></p>
+
+  </header>
+
+  <main>
+
+    <h2>Especialista</h2>
+
+    <div class="especialista-card">
+      <div>
+        <p><span>Nome:</span> <%= especialista.name %></p>
+      </div>
+
+      <div>
+        <p><span>Email:</span> <%= especialista.email %></p>
+      </div>
+
+      <div>
+        <p><span>CRM:</span> <%= especialista.crm %></p>
+      </div>
+    </div>
+
+  </main>
+
+</body>
+
+</html>
