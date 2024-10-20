@@ -2,7 +2,7 @@ import Clientes from "../../models/Clientes";
 import AppError from "../../errors/AppError";
 
 /* eslint-disable */
-const ShowUserService = async (id: string | number) => {
+const ShowClienteService = async (id: string | number) => {
   const user = await Clientes.findByPk(id, {
     attributes: ["id", "admin", "name",
       "email", "crm", "uf",
@@ -18,4 +18,4 @@ const ShowUserService = async (id: string | number) => {
   return user;
 }
 
-export default ShowUserService;
+export default ShowClienteService;

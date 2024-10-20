@@ -57,7 +57,7 @@ function SideBar({ isOpen, toggleDrawer }: Props) {
 
   const checkIsEspecialistasProprios = async () => {
     try {
-      const { data } = await api.get(user.type === "OPERADORA" ? `/admins/${user.id}` : `/admins/userOperadora/${user.id}`);
+      const { data } = await api.get(user.type === "ADMINISTRACAO" ? `/admins/${user.id}` : `/admins/userOperadora/${user.id}`);
 
       setIsEspecialistasProprios(data.data.especialistas === "PROPRIOS");
     } catch (e) {
@@ -66,7 +66,7 @@ function SideBar({ isOpen, toggleDrawer }: Props) {
   }
 
   useEffect(() => {
-    if (user.type === 'OPERADORA' || user.type === 'USER_OPERADORA') {
+    if (user.type === 'ADMINISTRACAO' || user.type === 'USER_OPERADORA') {
       checkIsEspecialistasProprios();
     } else {
       setIsEspecialistasProprios(false);
@@ -117,7 +117,7 @@ function SideBar({ isOpen, toggleDrawer }: Props) {
           </List>
         </Box>
 
-        {user.type === "MEDICO" && (
+        {user.type === "CLIENTE" && (
           <>
             <List>
               <ListItem
@@ -153,7 +153,7 @@ function SideBar({ isOpen, toggleDrawer }: Props) {
           </>
         )}
 
-        {(user.type === "OPERADORA" || user.type === "USER_OPERADORA") && (
+        {(user.type === "ADMINISTRACAO" || user.type === "USER_OPERADORA") && (
           <>
             <ListItem onClick={() => handleChangeCollapse("procedimentos")} className="cursor-pointer">
               <ListItemIcon>

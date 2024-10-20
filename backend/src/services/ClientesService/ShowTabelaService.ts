@@ -9,11 +9,11 @@ interface Return {
     totalPages: number,
 }
 
-const ShowEspecialistaTableService = async (page: number, operadoraId: number): Promise<Return> => {
+const ShowTabelaService = async (page: number, operadoraId: number): Promise<Return> => {
     const limit = 10;
     const offset = (page - 1) * limit;
 
-    const prestadores = await Clientes.findAll({
+    const cliente = await Clientes.findAll({
         attributes: [
             'id', 'name', 'email', 'status', 'crm', 'createdAt', 'motivo_recusa', 'operadoraId', 'isEspecialistaAmtech', 'fase'
         ],
@@ -30,10 +30,10 @@ const ShowEspecialistaTableService = async (page: number, operadoraId: number): 
     const totalPages = Math.ceil(count / limit);
 
     return {
-        data: prestadores,
+        data: cliente,
         total: count,
         totalPages,
     };
 }
 
-export default ShowEspecialistaTableService;
+export default ShowTabelaService;

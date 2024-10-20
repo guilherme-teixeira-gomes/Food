@@ -208,6 +208,8 @@ const CadastrarAlimentos: React.FC = () => {
                       size="small"
                     >
                       <MenuItem value="Carnes">Carnes</MenuItem>
+                      <MenuItem value="Japonesas">Comida Japonesa</MenuItem>
+                      <MenuItem value="Hamburguer">Hamburguers</MenuItem>
                       <MenuItem value="Massa">Massas</MenuItem>
                       <MenuItem value="Vegetais">Vegetais</MenuItem>
                       <MenuItem value="Bebidas">Bebidas</MenuItem>

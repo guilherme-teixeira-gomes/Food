@@ -50,7 +50,7 @@ export const initIO = (httpServer: Express) => {
     });
 
     socket.on('disconnect', (data: ConnectionData) => {
-      if (data.type === "MEDICO") {
+      if (data.type === "CLIENTE") {
         const cIndex = connection.prestadores.findIndex(c => c.socketId === data.socketId);
 
         if (cIndex >= 0) {

@@ -5,7 +5,6 @@ import { Response as Res } from "express";
 import AppError from "../../errors/AppError";
 import authConfig from "../../config/auth";
 
-import ShowUserService from "../UserCustomerService/ShowUserService";
 import {
   createAccessToken,
 } from "../../helpers/CreateTokens";
@@ -14,6 +13,8 @@ import Clientes from "../../models/Clientes";
 import Administradores from "../../models/Administradores";
 import SuperAdmins from "../../models/SuperAdmins";
 import ShowSuperByIdService from "../SuperAdminsService/ShowSuperByIdService";
+import ShowClienteService from "../ClientesService/ShowClienteService";
+
 
 
 interface RefreshTokenPayload {
@@ -39,7 +40,7 @@ export const RefreshTokenService = async (
     const { id, admin, tokenVersion, } = decoded as RefreshTokenPayload;
     let user: Clientes | Administradores  | SuperAdmins | null = null;
     if (admin === "CLIENTE") {
-      user = await ShowUserService(id);
+      user = await ShowClienteService(id);
     } else if (admin === "ADMINISTRADOR") {
       user = await ShowAdminService(id);
     } else if (admin === "SUPERADMIN" ) {
