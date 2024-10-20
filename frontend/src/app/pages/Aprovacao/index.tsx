@@ -167,9 +167,6 @@ function Aprovacao() {
       <SectionWrapper>
         <GridWrapper>
           <WrapperBack>
-
-            <div style={{ display: "flex", justifyContent: "end", width: "92%", marginBottom: "1%", marginTop: "10px" }}>
-            </div>
             <GridWrapper>
               {food && food.map(b => (
                 <Wrapper key={b.id}>

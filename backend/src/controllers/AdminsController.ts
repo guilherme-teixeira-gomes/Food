@@ -2,18 +2,16 @@ import { Request, Response } from "express";
 import AppError from "../errors/AppError";
 import CreateAdminService from "../services/AdminsService/CreateAdminsService";
 import ShowAdminId from "../services/AdminsService/GetAdminIdService";
-
 import UpdateAdminPerfilService from "../services/AdminsService/UpdateAdminPerfilService";
-import { ShowOperadorasDropdownService } from "../services/AdminsService/ShowOperadorasDropdownService";
-import { ListOperadorasService } from "../services/AdminsService/ListOperadorasService";
-;
+import { ListAdminsService } from "../services/AdminsService/ListAdminsService";
+import { ShowAdminDropdownService } from "../services/AdminsService/ShowAdminDropdownService";
 
 
 
 export const index = async (req: Request, res: Response): Promise<Response> => {
-  const operadoras = await ListOperadorasService();
+  const administradores = await ListAdminsService();
 
-  return res.json(operadoras);
+  return res.json(administradores);
 }
 
 export const store = async (req: Request, res: Response): Promise<Response> => {
@@ -77,7 +75,7 @@ export const getAdminById = async (req: Request, res: Response): Promise<Respons
 };
 
 export const dropdown = async (req: Request, res: Response): Promise<Response> => {
-  const opedadoras = await ShowOperadorasDropdownService();
+  const administradores = await ShowAdminDropdownService();
 
-  return res.json(opedadoras);
+  return res.json(administradores);
 }

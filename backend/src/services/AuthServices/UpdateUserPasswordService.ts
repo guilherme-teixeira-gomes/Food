@@ -3,8 +3,10 @@ import { verify } from "jsonwebtoken";
 import { hash } from "bcryptjs";
 import AppError from "../../errors/AppError";
 import authConfig from "../../config/auth";
-import ShowUserService from "../UserCustomerService/ShowUserService";
+
 import ShowAdminService from "../AdminsService/ShowAdminService";
+import ShowClienteService from "../ClientesService/ShowClienteService";
+
 
 interface RefreshTokenPayload {
     id: string;
@@ -24,8 +26,8 @@ export const UpdateUserPasswordService = async (token: string, body: Body) => {
     const { old_password, password, confirm_password } = body;
     const { id, admin, } = decoded as RefreshTokenPayload;
 
-    const user = admin === 'MEDICO'
-        ? await ShowUserService(id)
+    const user = admin === 'CLIENTE'
+        ? await ShowClienteService(id)
         : await ShowAdminService(id);
 
     if (!(await user.checkPassword(old_password))) {

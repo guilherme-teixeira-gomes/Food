@@ -7,7 +7,7 @@ interface Return {
     totalPages: number,
 }
 
-const ShowUsersTableService = async (page: number, operadoraId: number | null): Promise<Return> => {
+const ShowClientesTableService = async (page: number, operadoraId: number | null): Promise<Return> => {
     const limit = 10;
     const offset = (page - 1) * limit;
 
@@ -17,7 +17,7 @@ const ShowUsersTableService = async (page: number, operadoraId: number | null): 
         where.operadoraId = operadoraId;
     }
 
-    const prestadores = await Clientes.findAll({
+    const cliente = await Clientes.findAll({
         attributes: {
             include: [
                 'id', 'name', 'email', 'status', 'crm', 'createdAt', 'motivo_recusa', 'operadoraId', 'isEspecialistaAmtech', 'fase',
@@ -28,7 +28,7 @@ const ShowUsersTableService = async (page: number, operadoraId: number | null): 
         // offset: offset,
         where: {
             ...where,
-            "admin": "MEDICO",
+            "admin": "CLIENTE",
         },
         order: [["createdAt", "DESC"]]
     });
@@ -38,10 +38,10 @@ const ShowUsersTableService = async (page: number, operadoraId: number | null): 
     const totalPages = Math.ceil(count / limit);
 
     return {
-        data: prestadores,
+        data: cliente,
         total: count,
         totalPages,
     };
 }
 
-export default ShowUsersTableService;
+export default ShowClientesTableService;

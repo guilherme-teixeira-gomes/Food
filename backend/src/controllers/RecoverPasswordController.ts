@@ -7,13 +7,8 @@ import { getIO } from "../libs/socket";
 import AppError from "../errors/AppError";
 import { logger } from "../utils/logger";
 import { verify } from "crypto";
-import {
-  CreateTokenService,
-  SendEmailPasswordRecovery,
-  VerifyTokenService,
-  UpdateUserPasswordByEmailService,
-  DeleteToken
-} from "../services/UserServices/RecoverPasswordUserService";
+import { CreateTokenService, SendEmailPasswordRecovery, VerifyTokenService, UpdateUserPasswordByEmailService, DeleteToken } from "../services/ClientesService/RecoverPasswordClienteService";
+
 
 type IndexQuery = {
   searchParam: string;

@@ -5,18 +5,18 @@ import { toast } from "react-toastify";
 
 
 
-const AmTechRoute = () => {
+const SuperAdminRoute = () => {
     const { user } = useContext(AuthContext);
   
 
     useEffect(() => {
-      if (user.type !== 'AMTECH' && user.type !== 'USUARIO_AMTECH') {
+      if (user.type !== 'SUPERADMIN') {
       }
     }, [user]);
     
     return (
-      user.type === 'AMTECH' || user.type === 'USUARIO_AMTECH' ? <Outlet /> : <Navigate to="/home" />
+      user.type === 'SUPERADMIN' ? <Outlet /> : <Navigate to="/home" />
     );
   }
   
-export default AmTechRoute;
+export default SuperAdminRoute;

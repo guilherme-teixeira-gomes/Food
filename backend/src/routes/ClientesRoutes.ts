@@ -5,24 +5,12 @@ import * as ClientesController from "../controllers/ClientesController";
 
 const authRoutes = Router();
 
-authRoutes.get("/users/table", ClientesController.showUsersTable);
+authRoutes.get("/clientes/table", ClientesController.showUsersTable);
 
-authRoutes.get("/especialista/table/:id/operadora", ClientesController.showEspecialistaTable);
+authRoutes.get("/clienbte/table/:id/empresa", ClientesController.showEspecialistaTable);
 
-authRoutes.get("/medico/:id/perfil", ClientesController.show);
+authRoutes.get("/cliente/:id/perfil", ClientesController.show);
 
-authRoutes.put("/medico/:id/perfil", ClientesController.updatePerfil);
-
-authRoutes.put("/medico/:id/atualizar-status", ClientesController.updateMedicoStatus);
-
-authRoutes.put("/medico/:id/aprovar-perfil", ClientesController.aprovarMedicoPerfil);
-
-authRoutes.put("/medico/:id/recusar-perfil", ClientesController.recusarMedicoPerfil);
-
-authRoutes.put("/medico/:id/update-operadora", ClientesController.updateOperadora);
-
-authRoutes.put("/medico/:id/set-ausencia", ClientesController.setPeriodoAusencia);
-
-authRoutes.put("/medico/:id/finalizar-ausencia", ClientesController.finalizarPeriodoAusencia);
+authRoutes.put("/cliente/:id/perfil", ClientesController.updatePerfil);
 
 export default authRoutes;

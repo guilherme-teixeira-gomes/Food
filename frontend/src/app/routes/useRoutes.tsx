@@ -6,15 +6,7 @@ import { AuthContext, AuthProvider } from "../context/Auth/AuthContext";
 import BackdropLoading from "../components/BackdropLoading";
 import Login from "../pages/Login";
 import RecoverPassword from "../pages/RecoverPassword";
-
-import MedicoRoute from "app/context/Auth/MedicoRoute";
-import OperadoraRoute from "app/context/Auth/OperadoraRoute";
-import AmTechRoute from "app/context/Auth/AmTechRoute";
-
-
 import RedirectPage from "app/pages/RedirectPage";
-import AmTechAndPrestadorRoute from "app/context/Auth/AmTechAndPrestadorRoute";
-
 import TelaInicial from "app/pages/Home";
 import Formularios from "app/pages/Formularios";
 import Perfil from "app/pages/PerfilInconnet"
@@ -23,6 +15,10 @@ import Faq from "app/pages/Faq";
 import CadastrarAlimentos from "app/pages/CadastrarAlimentos";
 import Comidas from "app/pages/Comidas";
 import Aprovacao from "app/pages/Aprovacao";
+import ClienteRoute from "app/context/Auth/ClienteRoute";
+import SuperAdminRoute from "app/context/Auth/SuperAdminRoute";
+import AdministracaoRoute from "app/context/Auth/AdministracaoRoute";
+import AdmineSuperAdmin from "app/context/Auth/AdmineSuperAdmin";
 
 export enum RoutesPath {
   LOGIN = "/login",
@@ -36,16 +32,9 @@ export enum RoutesPath {
   FAQ = "/faq",
   PERFIL = "/perfil",
   CONFIGURACOES = "/configuracoes",
-
-
-
-
-
-  AMTECH_PROFILE = "/perfil/amtech",
-  AMTECH_DASHBOARD = "/home",
+  SUPERADMIN_PROFILE = "/perfil/super-admin",
+  SUPERADMIN_DASHBOARD = "/home",
   MAIN_PAGE = "",
-
-
   RECOVER_PASSWORD = "/recuperar/senha",
   CHANGE_PASSWORD = "/modificar_acesso",
 
@@ -86,9 +75,6 @@ const ProviderRoutes = () => {
     }
   }, [recoverToken])
 
-  const isAmtech = (): boolean => {
-    return ["AMTECH", "USUARIO_AMTECH"].includes(user.type);
-  }
 
   useEffect(() => {
     validateToken()
@@ -110,23 +96,21 @@ const ProviderRoutes = () => {
         <>
           <Route path={"/"} element={<RedirectPage />} />
 
-          <Route element={<MedicoRoute />}>
+          <Route element={<ClienteRoute />}>
 
 
           </Route>
 
-          <Route element={<AmTechAndPrestadorRoute />}>
+          <Route element={<AdmineSuperAdmin />}>
 
 
           </Route>
 
-          <Route element={<OperadoraRoute />}>
+          <Route element={<AdministracaoRoute />}>
 
-
-            {/* Other routes related to the 'OPERADORA' type user */}
           </Route>
 
-          <Route element={<AmTechRoute />}>
+          <Route element={<SuperAdminRoute />}>
 
 
           </Route>

@@ -5,18 +5,18 @@ import { toast } from "react-toastify";
 
 
 
-const AmTechAndPrestadorRoute = () => {
+const AdmineSuperAdmin = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    if (!["OPERADORA","USER_OPERADORA", "AMTECH", "USUARIO_AMTECH"].includes(user.type)) {
+    if (!["ADMINISTRACAO", "SUPERADMIN"].includes(user.type)) {
       toast.error('Acesso negado');
     }
   }, [user]);
 
   return (
-    ["OPERADORA","USER_OPERADORA", "AMTECH", "USUARIO_AMTECH"].includes(user.type) ? <Outlet /> : <Navigate to="/home" />
+    ["ADMINISTRACAO","SUPERADMIN"].includes(user.type) ? <Outlet /> : <Navigate to="/home" />
   );
 }
 
-export default AmTechAndPrestadorRoute;
+export default AdmineSuperAdmin;

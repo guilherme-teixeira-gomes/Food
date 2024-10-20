@@ -88,13 +88,13 @@ function Notification() {
         socket.on('connect', () => {
             const socketId = socket.id;
 
-            if (user.type === "MEDICO") {
+            if (user.type === "CLIENTE") {
                 socket.emit('connectUser', {
                     userId: user.id,
                     type: user.type,
                     socketId
                 });
-            } else if (user.type === "OPERADORA") {
+            } else if (user.type === "ADMINISTRACAO") {
                 socket.emit('joinRoom', user.id);
             } else if (user.type === "USER_OPERADORA") {
                 api.get(`/userOperadora/${user.id}`).then(({ data }) => {

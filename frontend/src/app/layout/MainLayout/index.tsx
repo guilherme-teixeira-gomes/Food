@@ -47,11 +47,11 @@ function MainLayout({ children }: Props) {
   const [navbarColor, setNavbarColor] = useState("#81b2fc");
 
   const hanlgeSetNavbarColor = () => {
-    if (user.type === "MEDICO") {
+    if (user.type === "CLIENTE") {
       return setNavbarColor("#8187FC");
     }
 
-    if (user.type === "OPERADORA" || user.type === "USER_OPERADORA") {
+    if (user.type === "ADMINISTRACAO" || user.type === "USER_OPERADORA") {
       return setNavbarColor("#A281FC");
     }
 
@@ -124,7 +124,7 @@ function MainLayout({ children }: Props) {
   }
 
   const canBeEdit = (status: string) => {
-    if (user.type !== "OPERADORA") {
+    if (user.type !== "ADMINISTRACAO") {
       return false;
     }
 
@@ -185,7 +185,7 @@ function MainLayout({ children }: Props) {
               <MenuIcon />
             </IconButton>
 
-            {user.type !== "MEDICO" && (
+            {user.type !== "CLIENTE" && (
 
               <S.SearchContainer ref={ref}>
                 <S.SearchField
@@ -259,7 +259,7 @@ function MainLayout({ children }: Props) {
           </div>
           <S.IconContainer>
             <div>
-              {user.type === 'MEDICO' && (
+              {user.type === 'CLIENTE' && (
                 <div>
                   <label style={{ marginTop: '6px', color: textStyle.color, fontWeight: 'bold' }}>
                     {switchText}

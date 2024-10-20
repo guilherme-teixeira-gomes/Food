@@ -2,8 +2,8 @@ import { Request } from "express";
 import AppError from "../../errors/AppError";
 import authConfig from "../../config/auth";
 import { verify } from "jsonwebtoken";
-import ShowUserService from "../../services/UserCustomerService/ShowUserService";
 import Clientes from "../../models/Clientes";
+import ShowClienteService from "../../services/ClientesService/ShowClienteService";
 
 interface RefreshTokenPayload {
     id: string;
@@ -24,7 +24,7 @@ export const getAuthPrestador = async (req: Request): Promise<Clientes> => {
 
     const { id } = decoded as RefreshTokenPayload;
 
-    const user = await ShowUserService(id);
+    const user = await ShowClienteService(id);
 
     return user;
 }

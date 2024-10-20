@@ -14,8 +14,6 @@ authRoutes.post("/signup", ClientesController.store);
 
 authRoutes.post("/verifyEmail", ClientesController.VerifyEmailUser);
 
-authRoutes.post("verifyCrm", ClientesController.VerifyCrmUser);
-
 authRoutes.post("/login", SessionController.store);
 
 authRoutes.post("/update-password", ClientesController.updatePassword);

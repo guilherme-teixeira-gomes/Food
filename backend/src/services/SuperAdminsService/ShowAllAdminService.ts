@@ -18,7 +18,7 @@ const ShowAllAdminService = async () => {
       "especialistas",
       "createdAt"],
     where: {
-      admin: "OPERADORA"
+      admin: "ADMINISTRACAO"
     }
   });
   return amtech;

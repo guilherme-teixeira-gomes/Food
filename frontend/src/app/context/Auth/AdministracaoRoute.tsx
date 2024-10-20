@@ -1,20 +1,20 @@
 import { useContext, useEffect, useState } from "react";
 import { Outlet, Navigate } from 'react-router-dom'
 import { AuthContext } from "./AuthContext";
-import toastError from "app/errors/toastError";
 import { toast } from "react-toastify";
 
-const MedicoRoute = () => {
+
+
+const AdministracaoRoute = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    if (user.type !== 'MEDICO') {
+    if (user.type !== "ADMINISTRACAO") {
     }
   }, [user]);
 
   return (
-    user.type === 'MEDICO' ? <Outlet /> : <Navigate to="/" />
+    user.type === 'ADMINISTRACAO' ? <Outlet /> : <Navigate to="/" />
   );
-}
-
-export default MedicoRoute;
+};
+export default AdministracaoRoute;

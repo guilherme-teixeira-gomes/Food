@@ -24,19 +24,19 @@ interface Body {
     dataFim: string
 }
 
-const UpdateMedicoPerfilService = async (id: number | string, body: Body): Promise<Return> => {
-    const medico = await Clientes.findByPk(id);
+const UpdateClientePerfilService = async (id: number | string, body: Body): Promise<Return> => {
+    const cliente = await Clientes.findByPk(id);
 
-    if (!medico) {
-        throw new AppError("Medico não encontrado!");
+    if (!cliente) {
+        throw new AppError("Cliente não encontrado!");
     }
 
-    await medico.update(body);
+    await cliente.update(body);
 
     return {
         msg: 'Status atualizado com sucesso',
-        user: medico
+        user: cliente
     };
 }
 
-export default UpdateMedicoPerfilService;
+export default UpdateClientePerfilService;

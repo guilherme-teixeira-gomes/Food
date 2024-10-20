@@ -322,16 +322,7 @@ function SideBarOf() {
               }}
             >
               <Divider />
-              <p
-                style={{
-                  color: "#FFF",
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "12px",
-                  marginTop: "15%",
-                }}
-              >
-                CONFIGURAÇÕES
-              </p>
+          
               <div
                 style={{ width: "100%" }}
                 className={`${

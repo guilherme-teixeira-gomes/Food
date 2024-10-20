@@ -2,8 +2,8 @@ import { Sequelize } from "sequelize";
 import AppError from "../../errors/AppError";
 import Clientes from "../../models/Clientes";
 
-const ShowMedicoPerfilService = async (id: number | string): Promise<Clientes> => {
-    const medico = await Clientes.findByPk(id, {
+const ShowClientePerfilService = async (id: number | string): Promise<Clientes> => {
+    const cliente = await Clientes.findByPk(id, {
         attributes: {
             include: [
                 [Sequelize.literal("(select name from Administradores where Administradores.id = Clientes.operadoraId limit 1)"), "nome_operadora"]
@@ -11,12 +11,12 @@ const ShowMedicoPerfilService = async (id: number | string): Promise<Clientes> =
         }
     });
 
-    if (!medico) {
-        throw new AppError("Medico nao encontrado!");
+    if (!cliente) {
+        throw new AppError("Cliente nao encontrado!");
     }
 
 
-    return medico;
+    return cliente;
 }
 
-export default ShowMedicoPerfilService;
+export default ShowClientePerfilService;

@@ -4,7 +4,7 @@ interface Reponse {
     data: Administradores[]
 }
 
-export const ListOperadorasService = async (): Promise<Reponse> => {
+export const ListAdminsService = async (): Promise<Reponse> => {
     const admins = await Administradores.findAll({
         attributes: [
             "id",
