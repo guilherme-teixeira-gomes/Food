@@ -77,13 +77,9 @@ function MainLayout({ children }: Props) {
     }
   };
 
-  const switchText = inative ? 'Perfil Inativo' : 'Inativar Perfil ';
-  const textStyle = {
-    color: inative ? '#fff' : '#fff',
+  
 
-  };
-
-  const switchTex = inative ? 'Ativo' : 'Inativo';
+  
 
   const searchProcedimentos = async () => {
     try {
@@ -232,32 +228,8 @@ function MainLayout({ children }: Props) {
   
           </div>
           <S.IconContainer>
-            <div>
-             
-                <div>
-                  <label style={{ marginTop: '6px', color: textStyle.color, fontWeight: 'bold' }}>
-                    {switchText}
-                  </label>
-
-                  <Switch
-                    checked={inative}
-                    onChange={handleOpen}
-                    inputProps={{ 'aria-label': 'controlled' }}
-                  />
-                </div>
-     
-            </div>
-
-            <ChatIcon
-              className="cursor-pointer"
-              style={{ color: textStyle.color }}
-              onClick={() => navigate("/chat")}
-            />
-
-            {(user.type !== "AMTECH" && user.type !== "USUARIO_AMTECH") && (
-              <Notification />
-            )}
-
+            
+       
   
 
           </S.IconContainer>
@@ -266,52 +238,7 @@ function MainLayout({ children }: Props) {
 
       <S.BodyContainer>{children}</S.BodyContainer>
 
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={styleModalConfirmaInativar}>
-          <Typography className="text-center" id="modal-modal-title" variant="h5" component="h2">
-            {/* Adicione o título do modal aqui, se necessário */}
-          </Typography>
 
-          <div className="d-flex justify-content-center">
-            <h2 className="mb-4" style={{ color: "rgba(0,0,0,0.8)", fontSize: "24px" }}>Confirmar que ficará:  {switchTex}</h2>
-          </div>
-
-          <footer className="d-flex justify-content-center" style={{ gap: '1rem' }}>
-            <Button
-              onClick={handleClose}
-              color="secondary"
-              style={{
-                color: '#FFFFFF',
-                backgroundColor: '#EC536C',
-                borderRadius: '4px',
-                padding: '7px 15px',
-              }}
-              size="small"
-            >
-              CANCELAR
-            </Button>
-
-            <Button
-              onClick={handleConfirm}
-              color="secondary"
-              style={{
-                color: '#FFFFFF',
-                backgroundColor: '#59CEB5',
-                borderRadius: '4px',
-                padding: '7px 15px',
-              }}
-              size="small"
-            >
-              CONFIRMAR
-            </Button>
-          </footer>
-        </Box>
-      </Modal>
     </>
   );
 }
