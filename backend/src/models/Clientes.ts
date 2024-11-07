@@ -15,6 +15,7 @@ import {
   HasMany
 } from "sequelize-typescript";
 import { hash, compare } from "bcryptjs";
+import Compras from "./Compras";
 
 
 @Table({
@@ -32,18 +33,12 @@ class Clientes extends Model<Clientes> {
 
   @Column(DataType.STRING)
   name: string;
+  
+  @Column(DataType.STRING)
+  cpf: string;
 
   @Column(DataType.STRING)
   email: string;
-
-  @Column(DataType.STRING)
-  crm: string;
-
-  @Column(DataType.STRING(2))
-  uf: string;
-
-  @Column(DataType.STRING)
-  usuario: string;
 
   @Column(DataType.VIRTUAL)
   password: string;
@@ -59,6 +54,9 @@ class Clientes extends Model<Clientes> {
 
   @UpdatedAt
   updatedAt: Date;
+
+  @HasMany(() => Compras, "clienteId") 
+  compras: Compras[];
 
   @BeforeUpdate
   @BeforeCreate

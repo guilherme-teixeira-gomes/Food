@@ -1,8 +1,5 @@
-/* eslint-disable */
-import * as Yup from "yup";
-import { hash } from "bcryptjs";
+
 import AppError from "../../errors/AppError";
-import Administradores from "../../models/Administradores";
 import { Op } from "sequelize";
 import Comidas from "../../models/Comidas";
 

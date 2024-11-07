@@ -8,6 +8,6 @@ const ShowAllFoodService = async () => {
   const food = await Comidas.findAll({
   });
   return food;
-};;
+};
 
 export default ShowAllFoodService;

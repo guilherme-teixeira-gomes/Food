@@ -15,7 +15,7 @@ export const index = async (req: Request, res: Response): Promise<Response> => {
 }
 
 export const store = async (req: Request, res: Response): Promise<Response> => {
-  const { admin, name, email, password, usuario, whatsapp, especialistas, contatoOperacional, responsavePelaArea, outros, comercial, gestor } = req.body;
+  const { admin, name, email, password, whatsapp, } = req.body;
 
   try {
     const data = await CreateAdminService({
@@ -23,14 +23,7 @@ export const store = async (req: Request, res: Response): Promise<Response> => {
       name,
       email,
       password,
-      usuario,
       whatsapp,
-      especialistas,
-      contatoOperacional,
-      responsavePelaArea,
-      outros,
-      comercial,
-      gestor
     });
 
     return res.status(201).json({ msg: "Usuário criado com succeso", data });

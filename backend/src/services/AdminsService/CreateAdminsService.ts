@@ -10,15 +10,8 @@ interface Request {
   admin: string;
   name: string;
   email: string;
-  usuario: string;
   password: string;
-  especialistas: string;
   whatsapp: string;
-  contatoOperacional:string;
-  responsavePelaArea: string;
-  outros: string;
-  comercial: string;
-  gestor: string;
 }
 
 interface Response {
@@ -26,7 +19,6 @@ interface Response {
   admin: string;
   name: string;
   email: string;
-  usuario: string;
   whatsapp: string;
 }
 
@@ -35,14 +27,12 @@ const CreateAdminService = async ({
   name,
   email,
   password,
-  usuario,
   whatsapp,
 }: Request): Promise<Response> => {
   const schema = Yup.object().shape({
     admin: Yup.string().required(),
     name: Yup.string().required(),
     email: Yup.string().email().required(),
-    usuario: Yup.string().required(),
     password: Yup.string().required(),
     whatsapp: Yup.string().required(),
   });
@@ -52,7 +42,6 @@ const CreateAdminService = async ({
       admin,
       name,
       email,
-      usuario,
       password,
       whatsapp,
 
@@ -63,7 +52,7 @@ const CreateAdminService = async ({
 
   const adminExists = await Administradores.findOne({
     where: {
-      [Op.or]: [{ email: email }, { usuario: usuario }]
+      [Op.or]: [{ email: email }]
     }
   });
 
@@ -77,7 +66,6 @@ const CreateAdminService = async ({
     admin,
     name,
     email,
-    usuario,
     password,
     passwordHash: hashedPassword,
     whatsapp,
@@ -90,7 +78,6 @@ const CreateAdminService = async ({
     name: Admin.name,
     email: Admin.email,
     whatsapp: Admin.whatsapp,
-    usuario: Admin.usuario,
   }
 };
 

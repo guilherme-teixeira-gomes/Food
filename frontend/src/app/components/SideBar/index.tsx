@@ -19,7 +19,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import PendingActionsIcon from '@mui/icons-material/PendingActions';
-
+import NewspaperIcon from '@mui/icons-material/Newspaper';
 function SideBarOf() {
   const { user, handleLogout } = useContext(AuthContext);
   const location = useLocation();
@@ -241,7 +241,7 @@ function SideBarOf() {
                     >
                       <FastfoodIcon />
                     </div>
-                    Comidas
+                    Cardapio
                   </StyledButton>
                 </Link>
               </div>
@@ -322,7 +322,37 @@ function SideBarOf() {
               }}
             >
               <Divider />
-          
+              <div
+                style={{ width: "100%" }}
+                className={`${
+                  isActive("/historico") ? "link-active" : ""
+                } position-relative`}
+              >
+                <Link
+                  to="/historico"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <StyledButton style={{ marginLeft: "10%" }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        borderRadius: "10px",
+                        padding: "7%",
+                        width: "30px",
+                        height: "30px",
+                        backgroundColor: `${
+                          isActive("/historico") ? "#fe3b00e6" : "#fe6600"
+                        }`,
+                      }}
+                    >
+                      <NewspaperIcon />
+                    </div>
+                    Historico
+                  </StyledButton>
+                </Link>
+              </div>
               <div
                 style={{ width: "100%" }}
                 className={`${

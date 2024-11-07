@@ -18,23 +18,14 @@ module.exports = {
         type: DataTypes.STRING,
         allowNull: false
       },
+      cpf: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
-      },
-      crm: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-      },
-      uf: {
-        type: DataTypes.STRING(2),
-        allowNull: true
-      },
-      usuario: {
-        type: DataTypes.STRING,
-        allowNull: false,
       },
       passwordHash: {
         type: DataTypes.STRING,

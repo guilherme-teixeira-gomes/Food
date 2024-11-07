@@ -36,9 +36,6 @@ class Administradores extends Model<Administradores> {
   @Column(DataType.STRING)
   email: string;
 
-  @Column(DataType.STRING)
-  usuario: string;
-
   @Column(DataType.VIRTUAL)
   password: string;
 

@@ -8,6 +8,7 @@ import Administradores from "../models/Administradores";
 import SuperAdmins from "../models/SuperAdmins";
 import Comidas from "../models/Comidas";
 import Aprovacoes from "../models/Aprovacoes";
+import Compras from "../models/Compras";
 
 
 
@@ -21,6 +22,7 @@ const models = [
   Administradores,
   SuperAdmins,
   Comidas,
+  Compras,
   Aprovacoes
 ];
 

@@ -44,6 +44,7 @@ export const GridWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  margin-top: 5%;
   justify-content: center;
 `;
 export const ShortCardWrapper = styled.div`

@@ -9,16 +9,10 @@ const ShowAdminService = async (id: string | number) => {
       "admin",
       "name",
       "email",
-      "usuario",
       "passwordHash",
       "whatsapp",
       "tokenHash",
-      "avatarPath",
-      "contatoOperacional",
-      "responsavePelaArea",
-      "outros",
-      "comercial",
-      "gestor"
+  
     ]
   });
 

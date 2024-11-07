@@ -77,17 +77,6 @@ const useAuth = () => {
     }
   }, []);
 
-  const customValidation = (value) => {
-    if (
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) &&
-      !/^\d{2}\.\d{3}\.\d{2}$/.test(value)
-    ) {
-      throw new Yup.ValidationError("Digite um email ou CRM válido", value);
-    } else {
-      return;
-    }
-  };
-
   const handleLogin = async (userData, rememberLogin) => {
     setLoading(true);
 
@@ -132,7 +121,6 @@ const useAuth = () => {
     }
   };
 
-  const handlerSignupOperadora = async () => { }
 
   const handleLogout = async () => {
     setLoading(true);
@@ -154,80 +142,6 @@ const useAuth = () => {
     }
   };
 
-  const handleLoginAdmins = async (userData, rememberLogin) => {
-    setLoading(true);
-
-    try {
-      const { data } = await api.post("/auth/login_admins", userData);
-
-      setUser({
-        id: data.user.id,
-        type: data.user.admin,
-        status: data.user.status || "OK",
-      });
-
-      localStorage.setItem("token", JSON.stringify(data.token));
-      api.defaults.headers.Authorization = `Bearer ${data.token}`;
-
-      if (rememberLogin === true) {
-        localStorage.setItem("loginData", JSON.stringify(userData));
-      }
-
-      localStorage.setItem("typeUser", JSON.stringify(data.user.admin));
-      localStorage.setItem("idUser", JSON.stringify(data.user.id));
-
-      setIsAuth(true);
-      toast.success(i18n.t("auth.toasts.success"));
-
-      setLoading(false);
-      return true;
-
-      // setTimeout(() => {
-      //   history(RoutesPath.DASHBOARD);
-      //   setLoading(false);
-      // }, 600);
-    } catch (err) {
-      toastError(err);
-      setLoading(false);
-    }
-  };
-  const handleLoginAmtech = async (userData, rememberLogin) => {
-    setLoading(true);
-
-    try {
-      const { data } = await api.post("/auth/login_amtech", userData);
-
-      setUser({
-        id: data.user.id,
-        type: data.user.admin,
-        status: data.user.status || "OK",
-      });
-
-      localStorage.setItem("token", JSON.stringify(data.token));
-      api.defaults.headers.Authorization = `Bearer ${data.token}`;
-
-      if (rememberLogin === true) {
-        localStorage.setItem("loginData", JSON.stringify(userData));
-      }
-
-      localStorage.setItem("typeUser", JSON.stringify(data.user.admin));
-      localStorage.setItem("idUser", JSON.stringify(data.user.id));
-
-      setIsAuth(true);
-      toast.success(i18n.t("auth.toasts.success"));
-
-      setLoading(false);
-      return true;
-
-      // setTimeout(() => {
-      //   history(RoutesPath.DASHBOARD);
-      //   setLoading(false);
-      // }, 600);
-    } catch (err) {
-      toastError(err);
-      setLoading(false);
-    }
-  };
 
   const handleValidateToken = async () => {
     setLoading(true);
@@ -261,11 +175,6 @@ const useAuth = () => {
     }
   }
 
-  // useEffect(() => {
-  //   console.log("Usuario info atualiado dentro do useAuth");
-  //   console.log(user);
-
-  // }, [user]);
 
   return {
     isAuth,
@@ -274,9 +183,6 @@ const useAuth = () => {
     loading,
     handleLogin,
     handleLogout,
-    customValidation,
-    handleLoginAdmins,
-    handleLoginAmtech,
     handleValidateToken
   };
 };

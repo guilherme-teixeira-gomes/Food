@@ -1,0 +1,22 @@
+.login {
+  color: #5a5a5d;
+  transition: all 0.5s ease-in-out;
+  text-align: center;
+}
+
+.login:hover {
+  color: #000;
+}
+
+.submit {
+  margin: 1rem 0 1rem;
+  background-color: #5a5a5d;
+  border-color: transparent;
+  color: #fff;
+}
+
+.submit:hover {
+  background-color: #fff;
+  border-color: #5a5a5d;
+  color: #5a5a5d;
+}

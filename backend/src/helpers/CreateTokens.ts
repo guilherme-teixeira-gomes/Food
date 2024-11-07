@@ -16,7 +16,6 @@ export const createAccessToken = (user: Clientes | Administradores  | SuperAdmin
       admin: user.admin,
       name: user.name,
       email: user.email,
-      usuario: user.usuario
     },
     secret,
     {

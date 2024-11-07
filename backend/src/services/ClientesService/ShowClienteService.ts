@@ -5,10 +5,8 @@ import AppError from "../../errors/AppError";
 const ShowClienteService = async (id: string | number) => {
   const user = await Clientes.findByPk(id, {
     attributes: ["id", "admin", "name",
-      "email", "crm", "uf",
-      "usuario", "passwordHash", "tokenHash",
-      "status", "isEspecialistaAmtech", "operadoraId",
-      "inativo", "solicitarAusencia", "dataInicio", "dataFim",]
+      "email", "cpf",
+     ]
   });
 
   if (!user) {

@@ -10,11 +10,15 @@ module.exports = {
         primaryKey: true,
         allowNull: false
       },
-      admin: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false
       },
-      name: {
+      cpf: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      admin: {
         type: DataTypes.STRING,
         allowNull: false
       },
@@ -23,15 +27,12 @@ module.exports = {
         allowNull: false,
         unique: true
       },
-      service: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      usuario: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
+    
       passwordHash: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      cargo: {
         type: DataTypes.STRING,
         allowNull: false
       },

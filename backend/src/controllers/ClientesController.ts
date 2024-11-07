@@ -11,7 +11,7 @@ import ShowClientePerfilService from "../services/ClientesService/ShowClientePer
 import UpdateClientePerfilService from "../services/ClientesService/UpdateClientePerfilService";
 import ShowTabelaService from "../services/ClientesService/ShowTabelaService";
 import ShowClientesTableService from "../services/ClientesService/ShowClientesTableService";
-
+import ShowHistoricoComprasService from "../services/ClientesService/ShowHistoricoCompanyService";
 
 type IndexQuery = {
   searchParam: string;
@@ -19,20 +19,13 @@ type IndexQuery = {
 };
 
 export const store = async (req: Request, res: Response): Promise<Response> => {
-  const { name, email, crm, uf, usuario, password, isEspecialistaAmtech, operadoraId, rg, cpf, fase, tipoDocumento } = req.body;
+  const { name, email, uf, usuario, password, cpf } = req.body;
 
   try {
     const data = await CreateClientesService({
       name,
       email,
-      crm,
-      usuario,
       password,
-      fase,
-      isEspecialistaAmtech,
-      operadoraId,
-      tipoDocumento,
-      rg,
       cpf
     });
 
@@ -121,4 +114,12 @@ export const showEspecialistaTable = async (req: Request, res: Response): Promis
   const data = await ShowTabelaService(1, Number(id));
 
   return res.json(data);
+}
+
+
+export const historico = async (req: Request, res: Response): Promise<Response> => {
+  const clienteId = parseInt(req.params.clienteId);
+  const cliente = await ShowHistoricoComprasService(clienteId);
+
+  return res.json(cliente);
 }

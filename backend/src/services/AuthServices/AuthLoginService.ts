@@ -40,20 +40,20 @@ const AuthLoginService = async ({
 
   let admin: Administradores  | Clientes | SuperAdmins | null = await Administradores.findOne({
     where: {
-      [Op.or]: [{ email: adminInfo }, { usuario: adminInfo }]
+      [Op.or]: [{ email: adminInfo }, ]
     }
   });
   if (!admin) {
     admin = await Clientes.findOne({
       where: {
-        [Op.or]: [{ email: adminInfo }, { usuario: adminInfo }]
+        [Op.or]: [{ email: adminInfo }, ]
       }
     });
   }
   if (!admin) {
     admin = await SuperAdmins.findOne({
       where: {
-        [Op.or]: [{ email: adminInfo }, { usuario: adminInfo }]
+        [Op.or]: [{ email: adminInfo },]
       }
     });
   } if (!admin) {

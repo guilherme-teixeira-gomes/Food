@@ -42,45 +42,6 @@ const Content = styled("div")(({ theme }) => ({
   justifyContent: "center",
 }));
 
-const Submit = styled(Button)(({ theme }) => ({
-  margin: theme.spacing(1, 0, 2),
-  backgroundColor: "#30BC65",
-  border: "1px solid transparent",
-  color: "#e6e3d9",
-  width: "300px",
-
-
-  "&:hover": {
-    backgroundColor: "#228a4a",
-    border: "1px solid #30BC65",
-    color: "#e6e3d9",
-  },
-}));
-
-const LogoImg = styled("img")(({ theme }) => ({
-  width: "100%", // Fix IE 11 issue.
-  height: "auto",
-  marginTop: theme.spacing(2),
-}));
-
-const LinksContainer = styled("div")(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  width: "100%",
-}));
-
-const PasswordInput = styled("div")(({ theme }) => ({
-  display: "flex",
-  flexDirection: "row",
-  alignItems: "center",
-  padding: "0px 10px",
-  marginBottom: "1rem",
-}));
-
-const ForgetBox = styled("div")(() => ({
-  display: "flex",
-  width: "100%",
-}));
 
 const Forget = styled(Link)(({ theme }) => ({
   padding: "0px 10px",
@@ -105,19 +66,6 @@ interface LoginDataTypes {
   password: string;
 };
 
-const BackgroundDiv = styled("div")(({ theme }) => ({
-  backgroundImage: `url(${LogoFundo})`, // Usar a imagem de fundo importada
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  width: "100%",
-  height: "100%",
-  position: "fixed",
-  top: 0,
-  left: 0,
-  display: "flex", // Para centralizar verticalmente
-  alignItems: "center", // Centralizar verticalmente
-  justifyContent: "center", // Centralizar horizontalmente
-}));
 
 const Login = () => {
   const navigate = useNavigate();
@@ -134,15 +82,7 @@ const Login = () => {
   };
   const handleOpen = () => {
     setOpen(true);
-  };
-
-  const handleLoginAndClose = () => {
-    handleOpen();
-    // Use setTimeout para atrasar o login e o redirecionamento
-    setTimeout(() => {
-      handleClose(); // Fecha o Backdrop
-    }, 2000); // 2 segundos de atraso
-  };
+  }
 
   const handleChangeInput = (e: any) => {
     setUserData(prev => ({ ...prev, [e.target.name]: e.target.value.trim() }));

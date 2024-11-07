@@ -11,6 +11,8 @@ authRoutes.get("/clienbte/table/:id/empresa", ClientesController.showEspecialist
 
 authRoutes.get("/cliente/:id/perfil", ClientesController.show);
 
+authRoutes.get("/historico/:clienteId", ClientesController.historico);
+
 authRoutes.put("/cliente/:id/perfil", ClientesController.updatePerfil);
 
 export default authRoutes;
