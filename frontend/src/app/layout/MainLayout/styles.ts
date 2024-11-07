@@ -1,13 +1,13 @@
 import { Box, FilledInput, FormControl } from "@mui/material";
 import styled from "styled-components";
 
-interface Props {
-  backgroudColor?: string
-}
 
-export const Container = styled(Box) <Props>`
-  background-color: ${(props) => props.backgroudColor ? props.backgroudColor : "#81b2fc"};
+
+export const Container = styled(Box) `
+  background-color: #fe6600;
   padding: 8px 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   z-index: 0;
   width: 100%;
   

@@ -1,6 +1,5 @@
 import { Container, Drawer } from "@mui/material";
 import SideBarOf from "app/components/SideBar";
-import TopBar from "app/components/TopBar";
 import React, { useState } from "react";
 
 function Faq() {
@@ -13,7 +12,6 @@ function Faq() {
       <div style={{backgroundColor:"#fff", borderRadius:"30px", width:"100%", height:"100vh"}}>
         <div style={{margin:"30px"}}>
 
-        <TopBar />
         <h1>PAGINA FAQ</h1>
         </div>
       </div>

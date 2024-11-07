@@ -1,6 +1,6 @@
-import { Chip, Container, Drawer, Stack, useMediaQuery } from "@mui/material";
+import { Box, Card, CardActionArea, CardContent, CardMedia, Chip, Container, Drawer, Grid, Stack, Typography, useMediaQuery } from "@mui/material";
 import SideBarOf from "app/components/SideBar";
-import TopBar from "app/components/TopBar";
+
 
 import React, { useContext, useEffect, useRef, useState } from "react";
 
@@ -9,18 +9,11 @@ import {
   ButtonAproved,
   ButtonContainer,
   ButtonReproved,
-  CategoriesWrapper,
   Categoryaa,
-  DeliveryInfo,
   Description,
-  Details,
-  Discount,
   GridWrapper,
   Images,
   Price,
-  PriceOriginal,
-  RestaurantDetails,
-  SectionTitle,
   SectionWrapper,
   Title,
   Wrapper,
@@ -28,24 +21,10 @@ import {
 
   WrapperImage,
 } from "./styles";
-import styled, { ThemeContext } from "styled-components";
-import { Avatar, Box, Button, Card, Divider, IconButton, Tooltip, Typography } from "@mui/material";
-import { format } from 'date-fns';
-import InfoIcon from '@mui/icons-material/Info';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import CheckIcon from '@mui/icons-material/Check';
-import CloseIcon from "@mui/icons-material/Close";
-import CancelIcon from '@mui/icons-material/Cancel';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
 import api from "app/services/api";
-import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from "react-router-dom";
 import getBackUrl from "app/utils/generics/getBackUrl";
+import MainLayout from "app/layout/MainLayout";
 
 
 interface Foods {
@@ -72,7 +51,8 @@ interface Aprovracao {
 function Aprovacao() {
   const [food, setFood] = useState<Foods[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-
+  const isMobile = useMediaQuery('(max-width:1000px)');
+  const isTablet = useMediaQuery('(max-width:960px)');
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const [buyPacks, setBuyPacks] = useState<Aprovracao[]>([]);
@@ -92,12 +72,12 @@ function Aprovacao() {
     try {
       await api.post(`/aproved/produto`, {
         produtoId,
-        status: "Aprovado", 
+        status: "Aprovado",
       });
-  
+
       alert("Produto aprovado e adicionado ao Cardápio!");
-      setBuyPacks([]);  
-      getPacks();      
+      setBuyPacks([]);
+      getPacks();
     } catch (e) {
       console.log(e);
       setError("Erro ao aprovar o produto.");
@@ -110,12 +90,12 @@ function Aprovacao() {
     try {
       await api.post(`/reproved/produto`, {
         produtoId,
-        status: "Reprovado", 
+        status: "Reprovado",
       });
-  
+
       alert("Produto reprovado!");
-      setBuyPacks([]);  
-      getPacks();      
+      setBuyPacks([]);
+      getPacks();
     } catch (e) {
       console.log(e);
       setError("Erro ao reprovado o produto.");
@@ -160,34 +140,80 @@ function Aprovacao() {
 
 
   return (
-    <div className="d-flex">
-      <div style={{ width: '300px' }}>
+    <Box
+      display="flex"
+      flexDirection={isTablet ? 'column' : 'row'}
+      justifyContent="center"
+      alignItems="flex-start"
+      width="100%"
+      minHeight="100vh"
+    >
+      <div style={{ width: isTablet ? '100%' : '300px' }}>
         <SideBarOf />
       </div>
-      <SectionWrapper>
-        <GridWrapper>
-          <WrapperBack>
-            <GridWrapper>
-              {food && food.map(b => (
-                <Wrapper key={b.id}>
-                  <WrapperImage>
-                    <Images src={getBackUrl() + "/" + (b?.produtoImage || '')} alt={b.produto} />
-                  </WrapperImage>
-                  <Title>{b.produto}</Title>
-                  <Price>{formatCurrency(b.preco)}</Price>
-                  <Categoryaa>Categoria: {b.categoria}</Categoryaa>
-                  <Description>{b.descricao}</Description>
-                  <ButtonContainer>
-                  <ButtonAproved onClick={() => handleAproved(b.id)}>Aprovar</ButtonAproved>
-                    <ButtonReproved onClick={() => handleReproved(b.id)}>Reprovar</ButtonReproved>
-                  </ButtonContainer>
-                </Wrapper>
-              ))}
-            </GridWrapper>
-          </WrapperBack>
-        </GridWrapper>
-      </SectionWrapper>
-    </div>
+      <div
+        style={{
+          width: '100%',
+          maxWidth: isTablet ? '100%' : 'calc(100% - 300px)',
+          padding: '20px',
+          paddingLeft: isTablet ? '5%' : '2%',
+          paddingRight: isTablet ? '5%' : '2%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+          overflow: 'hidden',
+        }}
+      >
+        <MainLayout />
+        <Box
+          bgcolor="#fff"
+          p={2}
+          sx={{
+            borderBottomLeftRadius: 10,
+            borderBottomRightRadius: 10,
+
+          }}
+          boxShadow="0px 4px 8px rgba(0, 0, 0, 0.1)"
+          mb={2}
+        >
+          <Typography variant="h4" gutterBottom>
+            Bem-vindo à nossa plataforma de delivery!
+          </Typography>
+          <Typography variant="subtitle1">
+            Descubra os melhores pratos e promoções na sua região.
+          </Typography>
+        </Box>
+
+        <Grid container spacing={3} justifyContent="center">
+          {food && food.map(b => (
+           <Grid item xs={12} sm={6} md={4} key={b.id}>
+            <Card>
+            <CardActionArea>
+            <CardMedia
+                    component="img"
+                    height={isMobile ? 'auto' : '350'}
+                    width={isMobile ? 'auto' : 'auto'}
+                    image={getBackUrl() + "/" + (b?.produtoImage || '')}
+                    alt={b.produto}
+                  />
+             <CardContent>
+             <Title> {b.produto}</Title>
+              <Price>{formatCurrency(b.preco)}</Price>
+              <Categoryaa>Categoria: {b.categoria}</Categoryaa>
+              <Description>{b.descricao}</Description>
+              <ButtonContainer>
+                <ButtonAproved onClick={() => handleAproved(b.id)}>Aprovar</ButtonAproved>
+                <ButtonReproved onClick={() => handleReproved(b.id)}>Reprovar</ButtonReproved>
+              </ButtonContainer>
+              </CardContent>
+              </CardActionArea>
+              </Card>
+            </Grid>
+          ))}
+
+        </Grid>
+      </div>
+    </Box>
   );
 }
 

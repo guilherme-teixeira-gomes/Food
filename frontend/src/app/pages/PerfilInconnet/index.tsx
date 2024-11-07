@@ -1,7 +1,6 @@
 import { Container, Drawer, Paper } from "@mui/material";
 import SideBarOf from "app/components/SideBar";
 import React, { useState } from "react";
-import TopBar from "app/components/TopBar";
 import MainLayout from "app/layout/MainLayout";
 
 function Perfil() {
@@ -21,7 +20,7 @@ function Perfil() {
       >
         <div style={{ margin: "30px" }}>
           
-            <TopBar />
+
             <h1>PAGINA PERFIL</h1>
             
           

@@ -1,6 +1,6 @@
-import { Chip, Container, Drawer, Grid, MenuItem, TextField } from "@mui/material";
+import { Box, Chip, Container, Drawer, Grid, MenuItem, TextField, Typography, useMediaQuery } from "@mui/material";
 import SideBarOf from "app/components/SideBar";
-import TopBar from "app/components/TopBar";
+
 import React, { useContext, useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import * as S from "./styles";
@@ -10,6 +10,7 @@ import { GridWrapper, SectionWrapper, WrapperBack } from "./styles";
 import api from "app/services/api";
 import ProdutoImage from "app/components/ProdutoImage";
 import { useNavigate } from "react-router-dom";
+import MainLayout from "app/layout/MainLayout";
 
 
 const initialState = {
@@ -25,6 +26,8 @@ const initialState = {
 const CadastrarAlimentos: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [food, setFood] = useState(initialState);
+  const isMobile = useMediaQuery('(max-width:600px)');
+  const isTablet = useMediaQuery('(max-width:960px)');
   const navigate = useNavigate();
   const [produtoLogo, setProdutoLogo] = useState<File | null>(null);
 
@@ -72,24 +75,68 @@ const CadastrarAlimentos: React.FC = () => {
     setProdutoLogo(null);
   }
   useEffect(() => {
-    setLoading(false); // Set loading to false once component is fully loaded
+    setLoading(false);
   }, []);
 
   return (
+    <Box
+      display="flex"
+      flexDirection={isTablet ? 'column' : 'row'}
+      justifyContent="center"
+      alignItems="flex-start"
+      width="100%"
+      minHeight="100vh"
+    >
+      <div style={{ width: isTablet ? '100%' : '300px' }}>
+        <SideBarOf />
+      </div>
+      <div
+        style={{
+          width: '100%',
+          maxWidth: isTablet ? '100%' : 'calc(100% - 300px)',
+          padding: '20px',
+          paddingLeft: isTablet ? '5%' : '2%',
+          paddingRight: isTablet ? '5%' : '2%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+          overflow: 'hidden',
+        }}
+      >
+        <MainLayout />
+        <Box
+          bgcolor="#fff"
+          p={2}
+          sx={{
+            borderBottomLeftRadius: 10,
+            borderBottomRightRadius: 10,
 
-    <div className="d-flex" style={{}}>
-      <SideBarOf />
-      <SectionWrapper>
-        <GridWrapper>
-          <WrapperBack>
-            <div style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "2%", marginBottom: "5%", paddingRight: "2%", paddingLeft: "2%" }}>
-              <div>
-                <h4
-                  style={{ color: "#757575" }}
-                >
-                  Cadaste um novo item
-                </h4>
-              </div>
+          }}
+          boxShadow="0px 4px 8px rgba(0, 0, 0, 0.1)"
+          mb={2}
+        >
+          <Typography variant="h4" gutterBottom>
+            Bem-vindo à nossa plataforma de delivery!
+          </Typography>
+          <Typography variant="subtitle1">
+            Descubra os melhores pratos e promoções na sua região.
+          </Typography>
+        </Box>
+        <Box mb={3}>
+
+          <Box
+            sx={{
+              borderRadius: 5,
+            }}
+            maxWidth={2500} justifyContent="center" alignItems="center" bgcolor={"#fff"}>
+            <div style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "2%", marginBottom: "5%", paddingRight: "2%", paddingLeft: "2%", paddingTop: "2%" }}>
+
+              <h4
+                style={{ color: "#9e4e19" }}
+              >
+                Cadastre um novo prato
+              </h4>
+
               <Stack direction="row" spacing={1}>
                 <Chip label="Em Aprovação"
                   style={{
@@ -124,7 +171,7 @@ const CadastrarAlimentos: React.FC = () => {
                 </div>
               </Grid>
 
-              <Grid item xs={12} md={8}>
+              <Grid item xs={12} md={6}>
                 <Grid container spacing={3}>
                   <Grid item xs={12} sm={6}>
                     <TextField
@@ -133,7 +180,7 @@ const CadastrarAlimentos: React.FC = () => {
                       name="produto"
                       fullWidth
                       autoFocus
-                      label="Nome do Produto"
+                      label="Nome do Prato"
                       autoComplete="produto"
                       onChange={(e: { target: { value: any; }; }) =>
                         handleChangeBenefitData({ produto: e.target.value })
@@ -166,7 +213,7 @@ const CadastrarAlimentos: React.FC = () => {
                       variant="outlined"
                       id="preco"
                       name="preco"
-                      label="Valor do Produto"
+                      label="Valor do Prato"
                       fullWidth
                       autoComplete="Valor"
                       size="small"
@@ -271,11 +318,10 @@ const CadastrarAlimentos: React.FC = () => {
                 onClick={postFood}
               />
             </div>
-          </WrapperBack>
-        </GridWrapper>
-      </SectionWrapper>
-    </div>
-
+          </Box>
+        </Box>
+      </div>
+    </Box>
   );
 };
 

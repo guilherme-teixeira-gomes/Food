@@ -1,41 +1,15 @@
-import { Container, Drawer, useMediaQuery } from "@mui/material";
+import { Card, CardActionArea, CardContent, CardMedia, Container, Drawer, Grid, useMediaQuery } from "@mui/material";
 import SideBarOf from "app/components/SideBar";
-import TopBar from "app/components/TopBar";
-
 import React, { useContext, useEffect, useRef, useState } from "react";
-
-
 import {
-  ButtonAccessAll,
-  ButtonBuy,
-  CategoriesWrapper,
-  Categoryaa,
+  Category,
   Description,
   Details,
-  Discount,
-  GridWrapper,
-  Images,
   Price,
-  PriceOriginal,
-  SectionTitle,
-  SectionWrapper,
   Title,
-  Wrapper,
-  WrapperBanner,
-  WrapperBeneficios,
-  WrapperImage,
-  WrapperLoading,
 } from "./styles";
-
-import styled, { ThemeContext } from "styled-components";
-
-
-
-
-
 import { Box, Button, Divider, IconButton, Typography } from "@mui/material";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-
 import CloseIcon from "@mui/icons-material/Close";
 import CancelIcon from '@mui/icons-material/Cancel';
 import AddIcon from '@mui/icons-material/Add';
@@ -43,6 +17,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import api from "app/services/api";
 import getBackUrl from "app/utils/generics/getBackUrl";
 import { AuthContext } from "app/context/Auth/AuthContext";
+import MainLayout from "app/layout/MainLayout";
 
 interface Aprovados {
   id: string;
@@ -98,6 +73,8 @@ function Comidas() {
   const isMobileScreen = useMediaQuery('only screen and (max-width: 768px)');
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { user } = useContext(AuthContext);
+  const isMobile = useMediaQuery('(max-width:1000px)');
+  const isTablet = useMediaQuery('(max-width:960px)');
   const [aprovados, setAprovados] = useState<Aprovados[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -155,7 +132,7 @@ function Comidas() {
             quantidade: 1,
             preco: shopItem.comidas.preco,
             produto: shopItem.comidas.produto,
-            precoTotal: shopItem.comidas.preco, 
+            precoTotal: shopItem.comidas.preco,
             quantidadeTotal: shopItem.comidas.disponiveis,
             comidas: shopItem.comidas,
           },
@@ -226,67 +203,116 @@ function Comidas() {
   }, [selectedCategory, comprasInit]);
 
   return (
-    <div className="d-flex">
-      <div style={{ width: '300px' }}>
+    <Box
+      display="flex"
+      flexDirection={isTablet ? 'column' : 'row'}
+      justifyContent="center"
+      alignItems="flex-start"
+      width="100%"
+      minHeight="100vh"
+    >
+      <div style={{ width: isTablet ? '100%' : '300px' }}>
         <SideBarOf />
       </div>
-
-      <Button
-        onClick={toggleDrawer}
+      <div
         style={{
-          position: 'fixed',
-          zIndex: 10001,
-          right: open ? 250 : 10,
-          top: 500,
-          background: open ? 'transparent' : "#fe6600",
-          color: "#fff",
-          backgroundColor: "#f86300",
-          cursor:"pointer"
+          width: '100%',
+          maxWidth: isTablet ? '100%' : 'calc(100% - 300px)',
+          padding: '20px',
+          paddingLeft: isTablet ? '5%' : '2%',
+          paddingRight: isTablet ? '5%' : '2%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+          overflow: 'hidden',
         }}
       >
-        {open ? null : <ShoppingCartOutlinedIcon />}
-      </Button>
+        <MainLayout />
+        <Box
+          bgcolor="#fff"
+          p={2}
+          sx={{
+            borderBottomLeftRadius: 10,
+            borderBottomRightRadius: 10,
 
-      <SectionWrapper>
-        <SectionTitle>
-          
-        </SectionTitle>
+          }}
+          boxShadow="0px 4px 8px rgba(0, 0, 0, 0.1)"
+          mb={2}
+        >
+          <Typography variant="h4" gutterBottom>
+            Bem-vindo à nossa plataforma de delivery!
+          </Typography>
+          <Typography variant="subtitle1">
+            Descubra os melhores pratos e promoções na sua região.
+          </Typography>
+        </Box>
 
-        <GridWrapper>
+        <Button
+          onClick={toggleDrawer}
+          style={{
+            position: 'fixed',
+            zIndex: 10001,
+            right: open ? 250 : 10,
+            top: 500,
+            background: open ? 'transparent' : "#fe6600",
+            color: "#fff",
+            backgroundColor: "#f86300",
+            cursor: "pointer"
+          }}
+        >
+          {open ? null : <ShoppingCartOutlinedIcon />}
+        </Button>
+
+
+        <Grid container spacing={3} justifyContent="center" alignItems="center">
           {aprovados.map((item) => (
-            <Wrapper key={item.id}>
-              <WrapperImage>
-                <Images src={getBackUrl() + "/" + (item.comidas.produtoImage || '')} alt={item.comidas.produto} />
-              </WrapperImage>
-              <Title>{item.comidas.produto}</Title>
-              <Price>{formatCurrency(item.comidas.preco)}</Price>
-              <Categoryaa>Categoria: {item.comidas.categoria}</Categoryaa>
-              <Details>Estoque: {item.comidas.disponiveis}</Details>
-              <Description>{item.comidas.descricao}</Description>
-              <Button style={{
-                outline: "none",
-                fontSize: "12px",
-                backgroundColor: "#26ad26",
-                color: "#fff",
-                fontWeight: "bold",
-                borderRadius: "20px",
-                border: "none",
-                cursor: "pointer",
-                padding: "10px 20px",
-                marginTop: "20px",
-                width: "100%",
-                maxWidth: "180px"
-              }}
-              sx={{
-                "&:hover": {
-                  backgroundColor: "#26ad26",
-                  opacity: [0.9, 0.8, 0.7],
-                },
-              }}
-              onClick={() => addToCart(item)}>Comprar</Button>
-            </Wrapper>
+            <Grid item xs={12} sm={6} md={4} key={item.id}>
+              <Card>
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    height={isMobile ? 'auto' : '350'}
+                    src={getBackUrl() + "/" + (item.comidas.produtoImage || '')}
+                    alt={item.comidas.produto}
+                  />
+                  <CardContent>
+                    <Title>{item.comidas.produto}</Title>
+                    <Price>{formatCurrency(item.comidas.preco)}</Price>
+                    <Category>Categoria: {item.comidas.categoria}</Category>
+                    <Details>Estoque: {item.comidas.disponiveis}</Details>
+                    <Description>{item.comidas.descricao}</Description>
+                    <Grid container justifyContent="center" style={{ marginTop: "20px" }}>
+                      <Button
+                        style={{
+                          outline: "none",
+                          fontSize: "14px",
+                          backgroundColor: "#26ad26",
+                          color: "#fff",
+                          fontWeight: "bold",
+                          borderRadius: "20px",
+                          border: "none",
+                          cursor: "pointer",
+                          padding: "10px 20px",
+                          width: "100%",
+                          maxWidth: "180px",
+                        }}
+                        sx={{
+                          "&:hover": {
+                            backgroundColor: "#26ad26",
+                            opacity: [0.9, 0.8, 0.7],
+                          },
+                        }}
+                        onClick={() => addToCart(item)}
+                      >
+                        Comprar
+                      </Button>
+                    </Grid>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Grid>
           ))}
-        </GridWrapper>
+        </Grid>
 
         <Drawer anchor="right" open={open} onClose={toggleDrawer} style={{ backgroundColor: 'transparent' }}>
           <Box style={{ width: '350px' }}>
@@ -327,13 +353,13 @@ function Comidas() {
                         style={{ padding: '5px', fontSize: '14px', outline: "none" }}
                         onClick={() => updateCartQuantity(item.id, item.quantidade - 1)}
                       >
-                        <RemoveIcon style={{ color: "#002426", borderRadius:"50px" }}
-                        sx={{
-                          "&:hover": {
-                            backgroundColor: "#fe660061",
-                            opacity: [0.9, 0.8, 0.7],
-                          },
-                        }} />
+                        <RemoveIcon style={{ color: "#002426", borderRadius: "50px" }}
+                          sx={{
+                            "&:hover": {
+                              backgroundColor: "#fe660061",
+                              opacity: [0.9, 0.8, 0.7],
+                            },
+                          }} />
                       </Button>
                       <Typography style={{
                         fontFamily: "cursive",
@@ -344,35 +370,35 @@ function Comidas() {
                         textAlign: 'center',
                       }}>{item.quantidade}</Typography>
                       <Button
-                      
+
                         style={{ padding: '3px', fontSize: '14px', outline: "none" }}
                         onClick={() => updateCartQuantity(item.id, item.quantidade + 1)}
                       >
-                       <AddIcon style={{ color: "#002426", borderRadius:"50px" }}
-                        sx={{
-                          "&:hover": {
-                            backgroundColor: "#fe660061",
-                            opacity: [0.9, 0.8, 0.7],
-                          },
-                        }} />
+                        <AddIcon style={{ color: "#002426", borderRadius: "50px" }}
+                          sx={{
+                            "&:hover": {
+                              backgroundColor: "#fe660061",
+                              opacity: [0.9, 0.8, 0.7],
+                            },
+                          }} />
                       </Button>
                     </div>
                     <IconButton onClick={() => removeFromCart(item.id)}
-                    style={{
-                      outline: "none",
-                      border: "none",
-                      cursor: "pointer",
-                      width: "100%",
-                      maxWidth: "20px",
-                      maxHeight:"20px"
-                    }}
-                    sx={{
-                      "&:hover": {
-                        backgroundColor: "#fe660061",
-                        opacity: [0.9, 0.8, 0.7],
-                      },
-                    }}
-                   >
+                      style={{
+                        outline: "none",
+                        border: "none",
+                        cursor: "pointer",
+                        width: "100%",
+                        maxWidth: "20px",
+                        maxHeight: "20px"
+                      }}
+                      sx={{
+                        "&:hover": {
+                          backgroundColor: "#fe660061",
+                          opacity: [0.9, 0.8, 0.7],
+                        },
+                      }}
+                    >
 
                       <CancelIcon style={{ color: "#fe6600", fontSize: '16px' }} />
                     </IconButton>
@@ -399,8 +425,9 @@ function Comidas() {
             </div>
           </Box>
         </Drawer>
-      </SectionWrapper>
-    </div>
+
+      </div>
+    </Box >
   );
 }
 

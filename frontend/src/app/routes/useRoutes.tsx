@@ -30,7 +30,7 @@ export enum RoutesPath {
 
 
   TELA_INICIAL = "/home",
-  COMIDAS = "/comidas",
+  CARDAPIO = "/cardapio",
   APROVACAO = "/aprovacao",
   FORMULARIOS = "/formulario",
   CADASTRAR_ALIMENTOS = "/cadastrar-alimentos",
@@ -95,39 +95,63 @@ const ProviderRoutes = () => {
       <Route path={RoutesPath.LOGIN} element={<Login />} />
       <Route path={RoutesPath.CADASTRO} element={<Signup />} />
       <Route path={RoutesPath.RECOVER_PASSWORD} element={<RecoverPassword />} />
-      <Route path={RoutesPath.TELA_INICIAL} element={<TelaInicial />} />
-      <Route path={RoutesPath.COMIDAS} element={<Comidas />} />
-      <Route path={RoutesPath.ADMINISTRADORES} element={<Administradores />} />
-      <Route path={RoutesPath.CLIENTES} element={<Clientes />} />
-      <Route path={RoutesPath.HISTORICO} element={<Historico />} />
-      <Route path={RoutesPath.HISTORICO_TODOS_CLIENTES} element={<HistoricoTodosClientes />} />
-      <Route path={RoutesPath.APROVACAO} element={<Aprovacao />} />
-      <Route path={RoutesPath.FORMULARIOS} element={<Formularios />} />
-      <Route path={RoutesPath.CADASTRAR_ALIMENTOS} element={<CadastrarAlimentos />} />
-      <Route path={RoutesPath.FAQ} element={<Faq />} />
-      <Route path={RoutesPath.PERFIL} element={<Perfil />} />
-      <Route path={RoutesPath.CONFIGURACOES} element={<Configuracoes />} />
       {!loading && (
         <>
           <Route path={"/"} element={<RedirectPage />} />
 
           <Route element={<ClienteRoute />}>
-
+            <Route path={RoutesPath.TELA_INICIAL} element={<TelaInicial />} />
+            <Route path={RoutesPath.CARDAPIO} element={<Comidas />} />
+            <Route path={RoutesPath.HISTORICO} element={<Historico />} />
+            <Route path={RoutesPath.FAQ} element={<Faq />} />
+            <Route path={RoutesPath.PERFIL} element={<Perfil />} />
+            <Route path={RoutesPath.CONFIGURACOES} element={<Configuracoes />} />
 
           </Route>
 
           <Route element={<AdmineSuperAdmin />}>
-
+            <Route path={RoutesPath.TELA_INICIAL} element={<TelaInicial />} />
+            <Route path={RoutesPath.CARDAPIO} element={<Comidas />} />
+            <Route path={RoutesPath.ADMINISTRADORES} element={<Administradores />} />
+            <Route path={RoutesPath.CLIENTES} element={<Clientes />} />
+            <Route path={RoutesPath.HISTORICO} element={<Historico />} />
+            <Route path={RoutesPath.HISTORICO_TODOS_CLIENTES} element={<HistoricoTodosClientes />} />
+            <Route path={RoutesPath.APROVACAO} element={<Aprovacao />} />
+            <Route path={RoutesPath.FORMULARIOS} element={<Formularios />} />
+            <Route path={RoutesPath.CADASTRAR_ALIMENTOS} element={<CadastrarAlimentos />} />
+            <Route path={RoutesPath.FAQ} element={<Faq />} />
+            <Route path={RoutesPath.PERFIL} element={<Perfil />} />
+            <Route path={RoutesPath.CONFIGURACOES} element={<Configuracoes />} />
 
           </Route>
 
           <Route element={<AdministracaoRoute />}>
-
+          <Route path={RoutesPath.TELA_INICIAL} element={<TelaInicial />} />
+            <Route path={RoutesPath.CARDAPIO} element={<Comidas />} />
+            <Route path={RoutesPath.ADMINISTRADORES} element={<Administradores />} />
+            <Route path={RoutesPath.CLIENTES} element={<Clientes />} />
+            <Route path={RoutesPath.HISTORICO_TODOS_CLIENTES} element={<HistoricoTodosClientes />} />
+            <Route path={RoutesPath.APROVACAO} element={<Aprovacao />} />
+            <Route path={RoutesPath.CADASTRAR_ALIMENTOS} element={<CadastrarAlimentos />} />
+            <Route path={RoutesPath.FAQ} element={<Faq />} />
+            <Route path={RoutesPath.PERFIL} element={<Perfil />} />
+            <Route path={RoutesPath.CONFIGURACOES} element={<Configuracoes />} />
           </Route>
 
           <Route element={<SuperAdminRoute />}>
 
-
+          <Route path={RoutesPath.TELA_INICIAL} element={<TelaInicial />} />
+            <Route path={RoutesPath.CARDAPIO} element={<Comidas />} />
+            <Route path={RoutesPath.ADMINISTRADORES} element={<Administradores />} />
+            <Route path={RoutesPath.CLIENTES} element={<Clientes />} />
+            <Route path={RoutesPath.HISTORICO} element={<Historico />} />
+            <Route path={RoutesPath.HISTORICO_TODOS_CLIENTES} element={<HistoricoTodosClientes />} />
+            <Route path={RoutesPath.APROVACAO} element={<Aprovacao />} />
+            <Route path={RoutesPath.FORMULARIOS} element={<Formularios />} />
+            <Route path={RoutesPath.CADASTRAR_ALIMENTOS} element={<CadastrarAlimentos />} />
+            <Route path={RoutesPath.FAQ} element={<Faq />} />
+            <Route path={RoutesPath.PERFIL} element={<Perfil />} />
+            <Route path={RoutesPath.CONFIGURACOES} element={<Configuracoes />} />
           </Route>
         </>
       )}

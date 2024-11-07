@@ -9,7 +9,7 @@ function RedirectPage() {
 
   useEffect(() => {
     navigate(
-      user.type === 'ADMINISTRACAO' || user.type === 'USER_OPERADORA'
+      user.type === 'ADMINISTRACAO'
         ? RoutesPath.TELA_INICIAL
         : user.type === 'CLIENTE'
           ? RoutesPath.TELA_INICIAL

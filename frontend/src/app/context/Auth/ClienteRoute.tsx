@@ -8,13 +8,13 @@ const ClienteRoute = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    if (user.type !== 'CLIENTE') {
+    if (user.type !== 'CLIENTE' && user.type !== 'ADMINISTRACAO' || user.type === "SUPERADMIN") {
     }
   }, [user]);
-
   return (
-    user.type === 'CLIENTE' ? <Outlet /> : <Navigate to="/" />
+    user.type === 'CLIENTE'|| user.type === 'ADMINISTRACAO' || user.type === "SUPERADMIN" ? <Outlet /> : <Navigate to="/" />
   );
 }
 
 export default ClienteRoute;
+

@@ -41,22 +41,8 @@ interface Props {
 
 function MainLayout({ children }: Props) {
   const navigate = useNavigate();
-
   const { user, handleLogout } = useContext(AuthContext);
 
-  const [navbarColor, setNavbarColor] = useState("#81b2fc");
-
-  const hanlgeSetNavbarColor = () => {
-    if (user.type === "CLIENTE") {
-      return setNavbarColor("#fe6600");
-    }
-
-    if (user.type === "ADMINISTRACAO" || user.type === "USER_OPERADORA") {
-      return setNavbarColor("#fe6600");
-    }
-
-    setNavbarColor("#59ceb5");
-  }
 
   const [search, setSearch] = useState("");
   const [seachResult, setSeachResult] = useState<Procedimento[]>([]);
@@ -147,9 +133,7 @@ function MainLayout({ children }: Props) {
     return ""
   }
 
-  useEffect(() => {
-    hanlgeSetNavbarColor();
-  }, [user.type]);
+
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -170,27 +154,17 @@ function MainLayout({ children }: Props) {
   return (
     <>
       
-<SideBarOf />
-      <S.Container backgroudColor={navbarColor}>
+      <S.Container >
         <div style={{ width: "100%" }}>
-          <div style={{ width: "25%", gap: "2rem" }}>
-            <IconButton
-              size="large"
-              edge="start"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-              onClick={toggleDrawer}
-              className="menu-icon"
-            >
-              <MenuIcon />
-            </IconButton>
+          <div style={{ width: "25%", gap: "2rem", paddingLeft:"2%" }}>
+           
 
-            {user.type !== "CLIENTE" && (
+           
 
               <S.SearchContainer ref={ref}>
                 <S.SearchField
                   id="component-filled"
-                  placeholder="Buscar Protocolo"
+                  placeholder="Buscar "
                   value={search}
                   onChange={(e) => setSearch(e.target.value)} />
                 <SearchIcon
@@ -255,11 +229,11 @@ function MainLayout({ children }: Props) {
                 </S.SearchList>
               </S.SearchContainer>
 
-            )}
+  
           </div>
           <S.IconContainer>
             <div>
-              {user.type === 'CLIENTE' && (
+             
                 <div>
                   <label style={{ marginTop: '6px', color: textStyle.color, fontWeight: 'bold' }}>
                     {switchText}
@@ -271,7 +245,7 @@ function MainLayout({ children }: Props) {
                     inputProps={{ 'aria-label': 'controlled' }}
                   />
                 </div>
-              )}
+     
             </div>
 
             <ChatIcon

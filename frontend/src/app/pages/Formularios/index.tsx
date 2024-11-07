@@ -10,7 +10,6 @@ import {
   TextField,
 } from "@mui/material";
 import SideBarOf from "app/components/SideBar";
-import TopBar from "app/components/TopBar";
 import { AuthContext } from "app/context/Auth/AuthContext";
 import toastError from "app/errors/toastError";
 import api from "app/services/api";
@@ -98,7 +97,7 @@ function Formularios() {
           width: "100%",
         }}
       >
-        <TopBar />
+    
         <h4 style={{ marginTop: "50px", marginBottom: "50px", marginLeft: "3%" }}>
           Cadastro - Novo Usuário
         </h4>

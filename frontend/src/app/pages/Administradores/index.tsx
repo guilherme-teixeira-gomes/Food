@@ -9,6 +9,8 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
+  useMediaQuery,
 
 } from "@mui/material";
 import Button from "@mui/material/Button";
@@ -22,6 +24,7 @@ import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import LoginIcon from '@mui/icons-material/Login';
 import ModalCadastroAdministradores from "app/components/ModalCadastroAdministradores";
 import SideBarOf from "app/components/SideBar";
+import MainLayout from "app/layout/MainLayout";
 
 const columns = [
   {
@@ -149,6 +152,8 @@ function Administradores() {
   const [administrador, setAdministrador] = useState<Adminstrador[]>([]);
   const [cadastroModal, setCadastroModal] = useState(false);
   const [resetSenha, setResetSenha] = useState(false);
+  const isMobile = useMediaQuery('(max-width:600px)');
+  const isTablet = useMediaQuery('(max-width:960px)');
   const [inativeModal, setInativeModal] = useState(false);
   const [selectedAdministrador, setSelectedAdministrador] = useState<Adminstrador | null>(null);
   const navigate = useNavigate();
@@ -194,16 +199,56 @@ function Administradores() {
 
   return (
 
-    <div className="d-flex">
-      <div style={{ width: '300px' }}>
+    <Box
+      display="flex"
+      flexDirection={isTablet ? 'column' : 'row'}
+      justifyContent="center"
+      alignItems="flex-start"
+      width="100%"
+      minHeight="100vh"
+    >
+      <div style={{ width: isTablet ? '100%' : '300px' }}>
         <SideBarOf />
       </div>
-      <TableContainerDiv>
+      <div
+        style={{
+          width: '100%',
+          maxWidth: isTablet ? '100%' : 'calc(100% - 300px)', 
+          padding: '20px',
+          paddingLeft: isTablet ? '5%' : '2%', 
+          paddingRight: isTablet ? '5%' : '2%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+          overflow: 'hidden', 
+        }}
+      >
+        <MainLayout />
+        <Box
+          bgcolor="#fff"
+          p={2}
+          sx={{
+            borderBottomLeftRadius: 10,  
+            borderBottomRightRadius: 10, 
 
+          }}
+          boxShadow="0px 4px 8px rgba(0, 0, 0, 0.1)"
+          mb={2}
+        >
+          <Typography variant="h4" gutterBottom>
+            Bem-vindo à nossa plataforma de delivery!
+          </Typography>
+          <Typography variant="subtitle1">
+            Descubra os melhores pratos e promoções na sua região.
+          </Typography>
+        </Box>
+        <Box mb={3}>
+        <Box 
+        sx={{borderRadius:5}}
+        maxWidth={2500} minHeight={700} justifyContent="center" alignItems="center"  bgcolor={"#fff"}>
         <Header>
           <h5
-            style={{
-              marginTop: "4%",
+            style={{  
               marginBottom: "1%",
               marginLeft: "2%",
               display: "flex",
@@ -214,7 +259,6 @@ function Administradores() {
           </h5>
           <div
             style={{
-              marginTop: "4%",
               marginBottom: "1%",
               marginLeft: "2%",
               display: "flex",
@@ -362,8 +406,8 @@ function Administradores() {
           </TableContainer>
 
         </TableContainerDiv>
-
-      </TableContainerDiv>
+        </Box>
+      </Box>
 
 
       {cadastroModal && (
@@ -375,6 +419,7 @@ function Administradores() {
       )}
 
     </div>
+    </Box>
   );
 }
 
