@@ -21,6 +21,9 @@ import AdministracaoRoute from "app/context/Auth/AdministracaoRoute";
 import AdmineSuperAdmin from "app/context/Auth/AdmineSuperAdmin";
 import Signup from "app/pages/Signup";
 import Historico from "app/pages/Historico";
+import HistoricoTodosClientes from "app/pages/HistoricoTodosClientes";
+import Administradores from "app/pages/Administradores";
+import Clientes from "app/pages/Clientes";
 
 export enum RoutesPath {
   LOGIN = "/login",
@@ -33,7 +36,10 @@ export enum RoutesPath {
   CADASTRAR_ALIMENTOS = "/cadastrar-alimentos",
   FAQ = "/faq",
   HISTORICO = "/historico",
+  HISTORICO_TODOS_CLIENTES = "/historico/clientes",
   CADASTRO = "/cadastrar",
+  ADMINISTRADORES = "/administradores",
+  CLIENTES = "/clientes",
   PERFIL = "/perfil",
   CONFIGURACOES = "/configuracoes",
   SUPERADMIN_PROFILE = "/perfil/super-admin",
@@ -91,7 +97,10 @@ const ProviderRoutes = () => {
       <Route path={RoutesPath.RECOVER_PASSWORD} element={<RecoverPassword />} />
       <Route path={RoutesPath.TELA_INICIAL} element={<TelaInicial />} />
       <Route path={RoutesPath.COMIDAS} element={<Comidas />} />
+      <Route path={RoutesPath.ADMINISTRADORES} element={<Administradores />} />
+      <Route path={RoutesPath.CLIENTES} element={<Clientes />} />
       <Route path={RoutesPath.HISTORICO} element={<Historico />} />
+      <Route path={RoutesPath.HISTORICO_TODOS_CLIENTES} element={<HistoricoTodosClientes />} />
       <Route path={RoutesPath.APROVACAO} element={<Aprovacao />} />
       <Route path={RoutesPath.FORMULARIOS} element={<Formularios />} />
       <Route path={RoutesPath.CADASTRAR_ALIMENTOS} element={<CadastrarAlimentos />} />

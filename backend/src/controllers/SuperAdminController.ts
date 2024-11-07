@@ -7,6 +7,8 @@ import CreateSuperAdminService from "../services/SuperAdminsService/CreateSuperA
 import ShowSuperAdmins from "../services/SuperAdminsService/ShowSuperAdmins";
 import ShowAllAdminService from "../services/SuperAdminsService/ShowAllAdminService";
 import ShowSuperByIdService from "../services/SuperAdminsService/ShowSuperByIdService";
+import ShowAllHistoricoComprasService from "../services/SuperAdminsService/ShowAllHistoricoComprasService";
+import ShowAllClientesService from "../services/SuperAdminsService/ShowAllClientesService";
 
 
 
@@ -97,4 +99,31 @@ export const showAllAdmin = async (
     }
   }
 };
+
+export const showAllClientes = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const { id } = req.params;
+
+  try {
+    const data = await ShowAllClientesService();
+
+    return res.status(200).json({data})
+  } catch (error) {
+    if (error instanceof AppError) {
+      return res.status(error.statusCode).json({ error: error.message });
+    } else {
+      const exception = new Error((error as Error).message);
+      console.error(error);
+      return res.status(500).json({ error: exception.message });
+    }
+  }
+};
+
+export const historico = async (req: Request, res: Response): Promise<Response> => {
+  const clientes = await ShowAllHistoricoComprasService();
+
+  return res.json(clientes);
+}
 

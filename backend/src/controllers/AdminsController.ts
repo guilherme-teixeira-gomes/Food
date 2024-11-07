@@ -15,15 +15,30 @@ export const index = async (req: Request, res: Response): Promise<Response> => {
 }
 
 export const store = async (req: Request, res: Response): Promise<Response> => {
-  const { admin, name, email, password, whatsapp, } = req.body;
+  const {
+    id,
+     name,
+    cpf,
+    admin,
+    email,
+    password,
+    cargo,
+    whatsapp,
+    uf,
+    cep } = req.body;
 
   try {
     const data = await CreateAdminService({
-      admin,
+      id,
       name,
+      cpf,
+      admin,
       email,
       password,
+      cargo,
       whatsapp,
+      uf,
+      cep
     });
 
     return res.status(201).json({ msg: "Usuário criado com succeso", data });

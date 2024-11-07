@@ -7,43 +7,48 @@ import Administradores from "../../models/Administradores";
 import { Op } from "sequelize";
 
 interface Request {
-  admin: string;
-  name: string;
-  email: string;
-  password: string;
-  whatsapp: string;
-}
-
-interface Response {
   id: number;
-  admin: string;
   name: string;
+  password: string;
+  cpf: string;
+  admin: string;
   email: string;
+  cargo: string;
   whatsapp: string;
+  uf: string;
+  cep: string;
 }
 
 const CreateAdminService = async ({
-  admin,
   name,
+  cpf,
+  admin,
   email,
   password,
+  cargo,
   whatsapp,
-}: Request): Promise<Response> => {
+  uf,
+  cep
+}: Request): Promise<Administradores> => {
   const schema = Yup.object().shape({
     admin: Yup.string().required(),
     name: Yup.string().required(),
     email: Yup.string().email().required(),
     password: Yup.string().required(),
-    whatsapp: Yup.string().required(),
+    cpf: Yup.string().required(),
   });
 
   try {
     await schema.validate({
-      admin,
       name,
+      cpf,
+      admin,
       email,
       password,
+      cargo,
       whatsapp,
+      uf,
+      cep
 
     });
   } catch (err: any) {
@@ -63,22 +68,21 @@ const CreateAdminService = async ({
   const hashedPassword = await hash(password, 8);
 
   const Admin = await Administradores.create({
-    admin,
     name,
+    cpf,
+    admin,
     email,
     password,
-    passwordHash: hashedPassword,
+    cargo,
     whatsapp,
+    uf,
+    cep,
+    passwordHash: hashedPassword,
+ 
 
   });
 
-  return {
-    id: Admin.id,
-    admin: Admin.admin,
-    name: Admin.name,
-    email: Admin.email,
-    whatsapp: Admin.whatsapp,
-  }
+  return Admin
 };
 
 export default CreateAdminService;

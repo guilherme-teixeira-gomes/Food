@@ -5,24 +5,23 @@ import AppsIcon from "@mui/icons-material/Apps";
 import * as S from "./styles";
 import { StyledButton, efeitoxd } from "./styles";
 import { RoutesPath } from "app/routes/useRoutes";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { AuthContext } from "app/context/Auth/AuthContext";
 import Person2Icon from '@mui/icons-material/Person2';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import SettingsIcon from '@mui/icons-material/Settings';
 import HomeIcon from '@mui/icons-material/Home';
-import QuizIcon from '@mui/icons-material/Quiz';
-import EditNoteIcon from '@mui/icons-material/EditNote';
-import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
-import MenuIcon from '@mui/icons-material/Menu';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import PendingActionsIcon from '@mui/icons-material/PendingActions';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
+import BusinessIcon from '@mui/icons-material/Business';
+import FaceIcon from '@mui/icons-material/Face';
 function SideBarOf() {
   const { user, handleLogout } = useContext(AuthContext);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -121,9 +120,8 @@ function SideBarOf() {
 
               <div
                 style={{ width: "100%" }}
-                className={`${
-                  isActive("/home") ? "link-active" : ""
-                } position-relative`}
+                className={`${isActive("/home") ? "link-active" : ""
+                  } position-relative`}
               >
                 <Link
                   to="/home"
@@ -139,9 +137,8 @@ function SideBarOf() {
                         padding: "7%",
                         width: "30px",
                         height: "30px",
-                        backgroundColor: `${
-                          isActive("/home") ? "#fe3b00e6" : "#fe6600"
-                        }`,
+                        backgroundColor: `${isActive("/home") ? "#fe3b00e6" : "#fe6600"
+                          }`,
                       }}
                     >
                       <HomeIcon />
@@ -153,9 +150,8 @@ function SideBarOf() {
 
               <div
                 style={{ width: "100%" }}
-                className={`${
-                  isActive("/cadastrar-alimentos") ? "link-active" : ""
-                } position-relative`}
+                className={`${isActive("/cadastrar-alimentos") ? "link-active" : ""
+                  } position-relative`}
               >
                 <Link
                   to="/cadastrar-alimentos"
@@ -171,22 +167,20 @@ function SideBarOf() {
                         padding: "7%",
                         width: "30px",
                         height: "30px",
-                        backgroundColor: `${
-                          isActive("/cadastrar-alimentos") ? "#fe3b00e6" : "#fe6600"
-                        }`,
+                        backgroundColor: `${isActive("/cadastrar-alimentos") ? "#fe3b00e6" : "#fe6600"
+                          }`,
                       }}
                     >
                       <LocalDiningIcon />
                     </div>
-                  Cadastrar Alimentos
+                    Cadastrar Alimentos
                   </StyledButton>
                 </Link>
               </div>
               <div
                 style={{ width: "100%" }}
-                className={`${
-                  isActive("/aprovacao") ? "link-active" : ""
-                } position-relative`}
+                className={`${isActive("/aprovacao") ? "link-active" : ""
+                  } position-relative`}
               >
                 <Link
                   to="/aprovacao"
@@ -202,23 +196,21 @@ function SideBarOf() {
                         padding: "7%",
                         width: "30px",
                         height: "30px",
-                        backgroundColor: `${
-                          isActive("/aprovacao") ? "#fe3b00e6" : "#fe6600"
-                        }`,
+                        backgroundColor: `${isActive("/aprovacao") ? "#fe3b00e6" : "#fe6600"
+                          }`,
                       }}
                     >
                       <PendingActionsIcon />
                     </div>
-                  Em Aprovação
+                    Em Aprovação
                   </StyledButton>
                 </Link>
               </div>
 
               <div
                 style={{ width: "100%" }}
-                className={`${
-                  isActive("/comidas") ? "link-active" : ""
-                } position-relative`}
+                className={`${isActive("/comidas") ? "link-active" : ""
+                  } position-relative`}
               >
                 <Link
                   to="/comidas"
@@ -234,9 +226,8 @@ function SideBarOf() {
                         padding: "7%",
                         width: "30px",
                         height: "30px",
-                        backgroundColor: `${
-                          isActive("/comidas") ? "#fe3b00e6" : "#fe6600"
-                        }`,
+                        backgroundColor: `${isActive("/comidas") ? "#fe3b00e6" : "#fe6600"
+                          }`,
                       }}
                     >
                       <FastfoodIcon />
@@ -324,12 +315,25 @@ function SideBarOf() {
               <Divider />
               <div
                 style={{ width: "100%" }}
-                className={`${
-                  isActive("/historico") ? "link-active" : ""
-                } position-relative`}
+                className={`${isActive(
+                  user.type === "SUPERADMIN" || user.type === "ADMINISTRACAO"
+                    ? RoutesPath.HISTORICO_TODOS_CLIENTES
+                    : user.type === "CLIENTE"
+                      ? RoutesPath.HISTORICO
+                      : "/"
+                )
+                    ? "link-active"
+                    : ""
+                  } position-relative`}
               >
                 <Link
-                  to="/historico"
+                  to={
+                    user.type === "SUPERADMIN" || user.type === "ADMINISTRACAO"
+                      ? RoutesPath.HISTORICO_TODOS_CLIENTES
+                      : user.type === "CLIENTE"
+                        ? RoutesPath.HISTORICO
+                        : "/"
+                  }
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
                   <StyledButton style={{ marginLeft: "10%" }}>
@@ -342,9 +346,16 @@ function SideBarOf() {
                         padding: "7%",
                         width: "30px",
                         height: "30px",
-                        backgroundColor: `${
-                          isActive("/historico") ? "#fe3b00e6" : "#fe6600"
-                        }`,
+                        backgroundColor: `${isActive(
+                          user.type === "SUPERADMIN" || user.type === "ADMINISTRACAO"
+                            ? RoutesPath.HISTORICO_TODOS_CLIENTES
+                            : user.type === "CLIENTE"
+                              ? RoutesPath.HISTORICO
+                              : "/"
+                        )
+                            ? "#fe3b00e6"
+                            : "#fe6600"
+                          }`,
                       }}
                     >
                       <NewspaperIcon />
@@ -355,9 +366,66 @@ function SideBarOf() {
               </div>
               <div
                 style={{ width: "100%" }}
-                className={`${
-                  isActive("/perfil") ? "link-active" : ""
-                } position-relative`}
+                className={`${isActive("/administradores") ? "link-active" : ""
+                  } position-relative`}
+              >
+                <Link
+                  to="/administradores"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <StyledButton style={{ marginLeft: "10%" }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        borderRadius: "10px",
+                        padding: "7%",
+                        width: "30px",
+                        height: "30px",
+                        backgroundColor: `${isActive("/administradores") ? "#fe3b00e6" : "#fe6600"
+                          }`,
+                      }}
+                    >
+                      <BusinessIcon />
+                    </div>
+                    Adminstradores
+                  </StyledButton>
+                </Link>
+              </div>
+              <div
+                style={{ width: "100%" }}
+                className={`${isActive("/clientes") ? "link-active" : ""
+                  } position-relative`}
+              >
+                <Link
+                  to="/clientes"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <StyledButton style={{ marginLeft: "10%" }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        borderRadius: "10px",
+                        padding: "7%",
+                        width: "30px",
+                        height: "30px",
+                        backgroundColor: `${isActive("/clientes") ? "#fe3b00e6" : "#fe6600"
+                          }`,
+                      }}
+                    >
+                      <FaceIcon />
+                    </div>
+                    Clientes
+                  </StyledButton>
+                </Link>
+              </div>
+              <div
+                style={{ width: "100%" }}
+                className={`${isActive("/perfil") ? "link-active" : ""
+                  } position-relative`}
               >
                 <Link
                   to="/perfil"
@@ -373,9 +441,8 @@ function SideBarOf() {
                         padding: "7%",
                         width: "30px",
                         height: "30px",
-                        backgroundColor: `${
-                          isActive("/perfil") ? "#fe3b00e6" : "#fe6600"
-                        }`,
+                        backgroundColor: `${isActive("/perfil") ? "#fe3b00e6" : "#fe6600"
+                          }`,
                       }}
                     >
                       <Person2Icon />
@@ -387,9 +454,8 @@ function SideBarOf() {
 
               <div
                 style={{ width: "100%" }}
-                className={`${
-                  isActive("/configuracoes") ? "link-active" : ""
-                } position-relative`}
+                className={`${isActive("/configuracoes") ? "link-active" : ""
+                  } position-relative`}
               >
                 <Link
                   to="/configuracoes"
@@ -405,9 +471,8 @@ function SideBarOf() {
                         padding: "7%",
                         width: "30px",
                         height: "30px",
-                        backgroundColor: `${
-                          isActive("/configuracoes") ? "#fe3b00e6" : "#fe6600"
-                        }`,
+                        backgroundColor: `${isActive("/configuracoes") ? "#fe3b00e6" : "#fe6600"
+                          }`,
                       }}
                     >
                       <SettingsIcon />
@@ -424,7 +489,7 @@ function SideBarOf() {
                   onClick={() => handleLogout()}
                   style={{ marginLeft: "10%" }}
                   onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
+                  onMouseLeave={handleMouseLeave}
                 >
                   <div
                     style={divStyle}

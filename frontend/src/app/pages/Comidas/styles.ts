@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 
 export const ButtonAccessAll = styled.button`
-  /* Adicione os estilos do botão aqui */
+
 `;
 
 export const WrapperBanner = styled.div`
-  /* Estilos para o wrapper do banner */
+
   margin-bottom: 20px;
   width: 100%;
   display: flex;
@@ -14,11 +14,11 @@ export const WrapperBanner = styled.div`
 `;
 
 export const WrapperBeneficios = styled.div`
-  /* Estilos para o wrapper dos benefícios */
+
 `;
 
 export const WrapperLoading = styled.div`
-  /* Estilos para o wrapper de loading */
+  
 `;
 
 export const CategoriesWrapper = styled.div`
@@ -48,41 +48,8 @@ export const GridWrapper = styled.div`
   justify-content: center;
 `;
 export const ShortCardWrapper = styled.div`
- flex: 0  15%; /* Largura do card - 30% do contêiner */
+ flex: 0  15%; 
 `;
-// export const ButtonAccessAll = styled.button`
-//   /* Adicione os estilos do botão aqui */
-// `;
-
-// export const WrapperBanner = styled.div`
-//   /* Estilos para o wrapper do banner */
-//   margin-bottom: 20px;
-//   width: 100%;
-//   display: flex;
-//   justify-content: center;
-// `;
-
-// export const WrapperBeneficios = styled.div`
-//   /* Estilos para o wrapper dos benefícios */
-// `;
-
-// export const WrapperLoading = styled.div`
-//   /* Estilos para o wrapper de loading */
-// `;
-
-// export const CategoriesWrapper = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   padding: 20px;
-// `;
-
-// export const SectionWrapper = styled.div`
-//   padding: 20px;
-//   max-width: 100%;
-//   margin-left: auto;
-//   margin-right: auto;
-// `;
 
 export const WrapperBack = styled.div`
   position: relative;
@@ -97,22 +64,6 @@ export const WrapperBack = styled.div`
   background-color: #fff;
   margin: 10px;
 `;
-
-// export const SectionTitle = styled.div`
-//   margin-bottom: 10px;
-//   margin-left: 6%;
-// `;
-
-// export const GridWrapper = styled.div`
-//   display: flex;
-//   flex-wrap: wrap;
-//   gap: 20px;
-//   justify-content:center;
-// `;
-
-
-
-
 export const WrapperImage = styled.div`
   position: relative;
   text-align: center;

@@ -48,11 +48,11 @@ function MainLayout({ children }: Props) {
 
   const hanlgeSetNavbarColor = () => {
     if (user.type === "CLIENTE") {
-      return setNavbarColor("#8187FC");
+      return setNavbarColor("#fe6600");
     }
 
     if (user.type === "ADMINISTRACAO" || user.type === "USER_OPERADORA") {
-      return setNavbarColor("#A281FC");
+      return setNavbarColor("#fe6600");
     }
 
     setNavbarColor("#59ceb5");

@@ -13,9 +13,13 @@ const routes = Router();
 
 routes.get("/super-admins", SuperAdminController.show);
 
+routes.get("/historico", SuperAdminController.historico);
+
 routes.get("/super-admins/:id", SuperAdminController.showById);
 
 routes.get("/all/admin/:id", SuperAdminController.showAllAdmin);
+
+routes.get("/all/clientes/:id", SuperAdminController.showAllClientes);
 
 
 export default routes;

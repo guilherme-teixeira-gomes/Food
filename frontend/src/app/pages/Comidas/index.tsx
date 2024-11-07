@@ -33,18 +33,11 @@ import styled, { ThemeContext } from "styled-components";
 
 
 
-import { Avatar, Box, Button, Card, Divider, IconButton, Tooltip, Typography } from "@mui/material";
-import { format } from 'date-fns';
-
-import InfoIcon from '@mui/icons-material/Info';
+import { Box, Button, Divider, IconButton, Typography } from "@mui/material";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import CheckIcon from '@mui/icons-material/Check';
+
 import CloseIcon from "@mui/icons-material/Close";
 import CancelIcon from '@mui/icons-material/Cancel';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import api from "app/services/api";

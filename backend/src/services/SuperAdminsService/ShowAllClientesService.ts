@@ -2,12 +2,13 @@
 import Administradores from "../../models/Administradores";
 import AppError from "../../errors/AppError";
 import SuperAdmins from "../../models/SuperAdmins";
+import Clientes from "../../models/Clientes";
 
-const ShowAllAdminService = async () => {
-  const superadmin = await Administradores.findAll({
+const ShowAllClientesService = async () => {
+  const superadmin = await Clientes.findAll({
     
   });
   return superadmin;
 };;
 
-export default ShowAllAdminService;
+export default ShowAllClientesService;

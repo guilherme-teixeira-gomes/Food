@@ -34,6 +34,9 @@ class Administradores extends Model<Administradores> {
   name: string;
 
   @Column(DataType.STRING)
+  cpf: string;
+
+  @Column(DataType.STRING)
   email: string;
 
   @Column(DataType.VIRTUAL)
@@ -43,7 +46,16 @@ class Administradores extends Model<Administradores> {
   passwordHash: string;
 
   @Column(DataType.STRING)
+  cargo: string;
+
+  @Column(DataType.STRING)
   whatsapp: string;
+
+  @Column(DataType.STRING)
+  uf: string;
+
+  @Column(DataType.STRING)
+  cep: string;
 
   @Column(DataType.STRING)
   tokenHash: string;

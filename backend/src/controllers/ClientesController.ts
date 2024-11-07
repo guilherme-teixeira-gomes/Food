@@ -11,12 +11,9 @@ import ShowClientePerfilService from "../services/ClientesService/ShowClientePer
 import UpdateClientePerfilService from "../services/ClientesService/UpdateClientePerfilService";
 import ShowTabelaService from "../services/ClientesService/ShowTabelaService";
 import ShowClientesTableService from "../services/ClientesService/ShowClientesTableService";
-import ShowHistoricoComprasService from "../services/ClientesService/ShowHistoricoCompanyService";
+import ShowHistoricoComprasService from "../services/ClientesService/ShowHistoricoComprasService";
 
-type IndexQuery = {
-  searchParam: string;
-  pageNumber: string;
-};
+
 
 export const store = async (req: Request, res: Response): Promise<Response> => {
   const { name, email, uf, usuario, password, cpf } = req.body;

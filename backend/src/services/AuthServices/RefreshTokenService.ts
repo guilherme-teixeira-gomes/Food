@@ -41,7 +41,7 @@ export const RefreshTokenService = async (
     let user: Clientes | Administradores  | SuperAdmins | null = null;
     if (admin === "CLIENTE") {
       user = await ShowClienteService(id);
-    } else if (admin === "ADMINISTRADOR") {
+    } else if (admin === "ADMINISTRACAO") {
       user = await ShowAdminService(id);
     } else if (admin === "SUPERADMIN" ) {
       user = await ShowSuperByIdService(id);
